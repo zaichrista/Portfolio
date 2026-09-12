@@ -1,0 +1,89 @@
+:root {
+  color-scheme: light;
+  font-family: system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: #171717;
+}
+
+.page-home { background: #f8d66d; }
+.page-about { background: #a9d8f0; }
+.page-studio { background: #b9dfa8; }
+.page-archive { background: #d5b7e8; }
+.page-substack { background: #f2b6a0; }
+
+header,
+main,
+footer {
+  width: min(70rem, 100% - 2rem);
+  margin-inline: auto;
+}
+
+header {
+  padding-block: 1rem;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+a {
+  color: inherit;
+}
+
+nav a {
+  padding-block: 0.25rem;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+nav a[aria-current="page"] {
+  font-weight: 700;
+  text-decoration-thickness: 0.18em;
+}
+
+main {
+  min-height: calc(100vh - 10rem);
+  padding-block: clamp(3rem, 12vw, 9rem);
+}
+
+.eyebrow {
+  margin-block-end: 0;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin-block: 0.25rem 1rem;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  line-height: 1;
+}
+
+main > p:last-child {
+  max-width: 42rem;
+  font-size: 1.125rem;
+}
+
+footer {
+  display: flex;
+  gap: 1rem;
+  padding-block: 1rem 2rem;
+  font-size: 0.875rem;
+}
+
+a:focus-visible {
+  outline: 3px solid currentColor;
+  outline-offset: 3px;
+}
