@@ -11,7 +11,7 @@
 body {
   min-height: 100vh;
   margin: 0;
-  color: #171717;
+  color: #101218;
 }
 
 .page-home { background: #f8d66d; }
@@ -139,7 +139,7 @@ a:focus-visible {
   justify-content: center;
   width: 100%;
   margin: 0;
-  color: #050505;
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
   font-size: 13.8vw;
   font-weight: 400;
@@ -172,12 +172,12 @@ a:focus-visible {
   --seam-slant: clamp(2.25rem, 7vw, 7.5rem);
   --word-opacity: 1;
   --header-opacity: 1;
-  --header-color: #050505;
+  --header-color: #101218;
   min-height: 1600vh;
   min-height: 1600svh;
   overflow-x: clip;
   background: #e0e1dd;
-  color: #050505;
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
 }
 
@@ -230,27 +230,6 @@ a:focus-visible {
   width: 100%;
 }
 
-.page-home .theme-icon {
-  position: absolute;
-  top: 50%;
-  right: clamp(1.25rem, 2.5vw, 2.5rem);
-  display: grid;
-  width: clamp(1.9rem, 2.8vw, 2.5rem);
-  height: clamp(1.9rem, 2.8vw, 2.5rem);
-  place-items: center;
-  transform: translateY(-50%);
-}
-
-.page-home .theme-icon svg {
-  display: block;
-  width: 100%;
-  height: 100%;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-width: 1.35;
-}
-
 .page-home .page-loader,
 .page-home .section-transition {
   position: fixed;
@@ -263,7 +242,7 @@ a:focus-visible {
   display: grid;
   place-items: center;
   background: #e0e1dd;
-  color: #050505;
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
   font-size: clamp(2.25rem, 6vw, 7rem);
   opacity: 0;
@@ -317,7 +296,7 @@ a:focus-visible {
   max-width: none;
   margin: 0;
   padding-inline: clamp(1rem, 4vw, 4rem);
-  color: #050505;
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
   font-size: clamp(1.45rem, 3.6vw, 4.4rem);
   font-weight: 400;
@@ -341,7 +320,7 @@ a:focus-visible {
 }
 
 .page-home .inline-question {
-  color: #050505;
+  color: #101218;
   will-change: color;
 }
 
@@ -358,7 +337,7 @@ a:focus-visible {
   max-width: none;
   margin: 0;
   padding-inline: clamp(1rem, 5vw, 5rem);
-  color: #050505;
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
   font-size: clamp(2rem, 5.4vw, 6.5rem);
   font-weight: 400;
@@ -391,7 +370,7 @@ a:focus-visible {
   justify-content: space-between;
   max-width: none;
   margin: 0;
-  color: #050505;
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
   font-size: clamp(0.75rem, 1.45vw, 1.6rem);
   font-weight: 400;
@@ -420,7 +399,7 @@ a:focus-visible {
 
 .page-home .archive-letter {
   display: inline-block;
-  color: #050505;
+  color: #101218;
   transform: scaleY(1.14);
   transform-origin: center;
 }
@@ -600,7 +579,7 @@ a:focus-visible {
   aspect-ratio: 1.5 / 1;
   place-items: center;
   background: #b7b7b7;
-  color: #242424;
+  color: #101218;
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(0.45rem, 0.55vw, 0.6rem);
   letter-spacing: 0.2em;
@@ -649,7 +628,7 @@ a:focus-visible {
   z-index: 2;
   inset: 0;
   background: #fff1f2;
-  color: #050505;
+  color: #101218;
   pointer-events: none;
   visibility: hidden;
   will-change: transform;
@@ -697,7 +676,7 @@ a:focus-visible {
   right: 0;
   left: 0;
   height: 1px;
-  background: #050505;
+  background: #101218;
   content: "";
   pointer-events: none;
 }
@@ -788,7 +767,7 @@ a:focus-visible {
   min-height: 0;
   padding: clamp(1rem, 1.45vw, 1.65rem) clamp(1rem, 1.7vw, 1.9rem) clamp(1rem, 1.45vw, 1.65rem) 0;
   grid-template-columns: 47% 53%;
-  border-right: 1px solid #050505;
+  border-right: 1px solid #101218;
 }
 
 .page-home .substack-feature figure,
@@ -864,11 +843,11 @@ a:focus-visible {
   min-height: 0;
   padding: clamp(0.8rem, 1.2vw, 1.3rem);
   flex-direction: column;
-  border-bottom: 1px solid #050505;
+  border-bottom: 1px solid #101218;
 }
 
 .page-home .substack-story:nth-child(even) {
-  border-right: 1px solid #050505;
+  border-right: 1px solid #101218;
 }
 
 .page-home .substack-story-image {
@@ -939,7 +918,7 @@ a:focus-visible {
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
-  background: #050505;
+  background: #101218;
   color: #fff;
   pointer-events: auto;
 }
@@ -984,10 +963,51 @@ a:focus-visible {
 }
 
 .page-home .closing-footer-stage {
+  position: relative;
   display: grid;
   min-height: 0;
   flex: 1;
   place-items: center;
+}
+
+.page-home .closing-contact {
+  position: absolute;
+  z-index: 2;
+  bottom: clamp(0.9rem, 2.4vw, 1.85rem);
+  left: clamp(1rem, 2.6vw, 2.75rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 0.7vw, 0.6rem);
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.62rem, 0.85vw, 0.85rem);
+  letter-spacing: 0.04em;
+}
+
+.page-home .closing-contact-line {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0;
+  color: #fff;
+  text-decoration: none;
+}
+
+.page-home a.closing-contact-line:hover,
+.page-home a.closing-contact-line:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
+}
+
+.page-home .closing-contact-icon {
+  flex-shrink: 0;
+  width: 1.1em;
+  height: 1.1em;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.8;
 }
 
 .page-home .closing-name {
@@ -1026,7 +1046,7 @@ a:focus-visible {
   height: min(48vh, 32rem);
   border: 1px solid rgba(255, 255, 255, 0.72);
   grid-template-rows: auto minmax(0, 1fr);
-  background: #050505;
+  background: #101218;
   color: #fff;
 }
 
@@ -1150,7 +1170,7 @@ a:focus-visible {
     padding: 0.65rem 0;
     grid-template-columns: 40% 60%;
     border-right: 0;
-    border-bottom: 1px solid #050505;
+    border-bottom: 1px solid #101218;
   }
 
   .page-home .substack-feature h3 {
@@ -1187,7 +1207,7 @@ a:focus-visible {
 
   .page-home .substack-story-last {
     grid-column: 1 / -1;
-    border-top: 1px solid #050505;
+    border-top: 1px solid #101218;
   }
 
   .page-home .substack-story:nth-child(even) {
@@ -1195,7 +1215,7 @@ a:focus-visible {
   }
 
   .page-home .substack-story:nth-child(odd):not(.substack-story-last) {
-    border-right: 1px solid #050505;
+    border-right: 1px solid #101218;
   }
 
   .page-home .substack-story:nth-last-child(2) {
@@ -1224,6 +1244,12 @@ a:focus-visible {
     width: min(88vw, 32rem);
     height: min(48vh, 30rem);
   }
+
+  .page-home .closing-contact {
+    left: 1rem;
+    bottom: 0.75rem;
+    font-size: 0.62rem;
+  }
 }
 
 /* Consent and privacy controls */
@@ -1242,14 +1268,14 @@ a:focus-visible {
   align-items: flex-end;
   justify-content: center;
   padding: clamp(0.75rem, 1.6vw, 1.5rem);
-  background: rgba(5, 5, 5, 0.28);
-  color: #050505;
+  background: rgba(16, 18, 24, 0.28);
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
 }
 
 .privacy-consent-panel {
   width: min(96vw, 78rem);
-  border: 1px solid #050505;
+  border: 1px solid #101218;
   padding: clamp(1rem, 1.8vw, 1.8rem);
   background: #e0e1dd;
 }
@@ -1293,7 +1319,7 @@ a:focus-visible {
 
 .privacy-button {
   min-width: 7rem;
-  border: 1px solid #050505;
+  border: 1px solid #101218;
   padding: clamp(0.72rem, 1vw, 0.95rem) clamp(0.9rem, 1.4vw, 1.35rem);
   background: transparent;
   color: inherit;
@@ -1304,7 +1330,7 @@ a:focus-visible {
 }
 
 .privacy-button-primary {
-  background: #050505;
+  background: #101218;
   color: #fff;
 }
 
@@ -1319,7 +1345,7 @@ a:focus-visible {
 }
 
 .privacy-preference-list {
-  border-top: 1px solid #050505;
+  border-top: 1px solid #101218;
 }
 
 .privacy-preference {
@@ -1327,7 +1353,7 @@ a:focus-visible {
   gap: 1.5rem;
   align-items: center;
   padding-block: clamp(0.7rem, 1vw, 1rem);
-  border-bottom: 1px solid rgba(5, 5, 5, 0.35);
+  border-bottom: 1px solid rgba(16, 18, 24, 0.35);
   grid-template-columns: minmax(0, 1fr) auto;
   cursor: pointer;
 }
@@ -1352,7 +1378,7 @@ a:focus-visible {
   appearance: none;
   width: 2.8rem;
   height: 1.35rem;
-  border: 1px solid #050505;
+  border: 1px solid #101218;
   border-radius: 999px;
   background: transparent;
   cursor: pointer;
@@ -1364,13 +1390,13 @@ a:focus-visible {
   height: 0.85rem;
   margin: 0.19rem;
   border-radius: 50%;
-  background: #050505;
+  background: #101218;
   content: "";
   transition: transform 160ms ease;
 }
 
 .privacy-preference input:checked {
-  background: #050505;
+  background: #101218;
 }
 
 .privacy-preference input:checked::before {
@@ -1412,7 +1438,7 @@ a:focus-visible {
   margin: 0;
   padding: clamp(1.25rem, 4vw, 4rem);
   background: #e0e1dd;
-  color: #050505;
+  color: #101218;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -1468,8 +1494,8 @@ a:focus-visible {
   inset: 0;
   display: grid;
   place-items: center;
-  background: rgba(0, 0, 0, 0.82);
-  color: #111;
+  background: rgba(16, 18, 24, 0.82);
+  color: #101218;
   font-family: "Times New Roman", Times, serif;
 }
 
@@ -1626,7 +1652,7 @@ a:focus-visible {
   width: 100%;
   place-items: center;
   background: #b9b8b3;
-  color: #333;
+  color: #101218;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.68cqw;
   letter-spacing: 0.24em;
@@ -1950,12 +1976,6 @@ a:focus-visible {
     max-width: calc(100% - 4.25rem);
     font-size: clamp(0.66rem, 3vw, 0.8rem);
     transform: translateY(-50%);
-  }
-
-  .page-home .theme-icon {
-    right: 0.85rem;
-    width: 1.8rem;
-    height: 1.8rem;
   }
 
   .page-home .hero-word-left {

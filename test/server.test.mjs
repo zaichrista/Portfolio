@@ -50,7 +50,7 @@ describe('portfolio server', () => {
     assert.match(home, /data-scroll-section="about"/);
     assert.match(home, /data-scroll-section="archive"/);
     assert.match(home, /data-scroll-section="substack"/);
-    assert.match(home, /href="\/studio\.html"/);
+    assert.doesNotMatch(home, /href="\/studio\.html"/);
     assert.match(home, /class="closing-placeholder substack-editorial"/);
     assert.match(home, /class="substack-intro">And I write too<\/p>/);
     assert.match(home, /zaiinprogress\.substack\.com\/p\/my-spoon-cant-be-bent/);

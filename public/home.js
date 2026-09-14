@@ -41,7 +41,7 @@
   const archiveBlackProgress = 0.30 + archiveLetterZoomDuration * archiveFrameFillProgress;
   const disciplineHoldDistance = 2;
   const disciplineMoveDistance = 2;
-  const archiveDisplayHoldDistance = 3;
+  const archiveDisplayHoldDistance = 1.25;
   const archiveExitDistance = 1.35;
   const closingPlaceholderHoldDistance = 0.75;
   const footerRiseDistance = 1.35;
@@ -661,7 +661,7 @@
 
     if (nextSection) {
       nextSection.style.top = `calc(105% - ${archiveSectionLift.toFixed(2)}px)`;
-      nextSection.style.color = 'rgb(5, 5, 5)';
+      nextSection.style.color = 'rgb(16, 18, 24)';
     }
 
     if (archiveWord) {
@@ -695,21 +695,21 @@
 
     const closingHasCoveredFrame = archiveCoversFrame && archiveExitProgress >= 0.999;
     const backgroundChannel = archiveCoversFrame
-      ? (closingHasCoveredFrame ? 255 : 0)
+      ? (closingHasCoveredFrame ? 255 : 16)
       : 224;
     const backgroundGreen = archiveCoversFrame
-      ? (closingHasCoveredFrame ? 241 : 0)
+      ? (closingHasCoveredFrame ? 241 : 18)
       : 225;
     const backgroundBlue = archiveCoversFrame
-      ? (closingHasCoveredFrame ? 242 : 0)
+      ? (closingHasCoveredFrame ? 242 : 24)
       : 221;
     const backgroundColour = `rgb(${backgroundChannel}, ${backgroundGreen}, ${backgroundBlue})`;
-    const headerChannel = archiveCoversFrame
-      ? (archiveExitProgress >= 0.9 ? 5 : 255)
-      : 5;
+    const headerColour = archiveCoversFrame
+      ? (archiveExitProgress >= 0.9 ? 'rgb(16, 18, 24)' : 'rgb(255, 255, 255)')
+      : 'rgb(16, 18, 24)';
     page.style.backgroundColor = backgroundColour;
     if (hero) hero.style.backgroundColor = backgroundColour;
-    page.style.setProperty('--header-color', `rgb(${headerChannel}, ${headerChannel}, ${headerChannel})`);
+    page.style.setProperty('--header-color', headerColour);
     if (archiveWord) archiveWord.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
     if (archiveKicker) archiveKicker.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
 
@@ -782,9 +782,9 @@
     }
 
     if (inlineQuestion) {
-      const red = Math.round(5 + (178 - 5) * goldProgress);
-      const green = Math.round(5 + (134 - 5) * goldProgress);
-      const blue = Math.round(5 + (34 - 5) * goldProgress);
+      const red = Math.round(16 + (178 - 16) * goldProgress);
+      const green = Math.round(18 + (134 - 18) * goldProgress);
+      const blue = Math.round(24 + (34 - 24) * goldProgress);
       inlineQuestion.style.color = `rgb(${red}, ${green}, ${blue})`;
     }
 
