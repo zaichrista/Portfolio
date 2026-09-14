@@ -5,17 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex">
   <meta name="description" content="Zaira Christa — portfolio.">
-  <link rel="stylesheet" href="/styles.css?v=20260914">
+  <link rel="stylesheet" href="/styles.css?v=2026091467">
+  <script src="/hero-transition.js?v=2026091458" defer></script>
+  <script src="/home.js?v=2026091466" defer></script>
+  <script src="/legal.js?v=2026091467" defer></script>
   <title>Zaira Christa</title>
 </head>
 <body class="page-home">
   <header class="home-header">
     <nav aria-label="Primary navigation">
-      <a href="/index.html" aria-current="page">Home</a>
-      <a href="/about.html">About</a>
-      <a href="/archive.html">Archive</a>
-      <a href="/studio.html">Studio</a>
-      <a href="/substack.html">Substack</a>
+      <a href="#home" data-scroll-section="home" data-hero-return-link aria-current="page">Home</a>
+      <a href="#about" data-scroll-section="about">About</a>
+      <a href="#archive" data-scroll-section="archive">Archive</a>
+      <a href="/studio.html" data-studio-link>Studio</a>
+      <a href="#substack" data-scroll-section="substack">Substack</a>
     </nav>
     <span class="theme-icon" role="img" aria-label="Light theme">
       <svg viewBox="0 0 40 40" aria-hidden="true">
@@ -24,8 +27,254 @@
       </svg>
     </span>
   </header>
-  <main class="home-hero">
-    <h1 class="hero-name">ZAIRA CHRISTA</h1>
+  <div class="page-loader" aria-live="polite" aria-label="Loading requested section">
+    <span class="page-loader-value">0%</span>
+  </div>
+  <div class="section-transition" aria-hidden="true"></div>
+  <main class="home-hero" id="home">
+    <p class="reveal-copy" id="about"><span class="breakaway-copy">I hold a BA in Music from Oxford and hold an MA in Cultural and Creative Industries from King&rsquo;s College London, where my research sits at the intersection of nightlife, sound, and identity. I&rsquo;ve designed runway shows, built brand worlds from scratch, developed theoretical concepts in my academic writing, and directed photoshoots. The thread connecting all of it is the same obsession:</span> <span class="inline-question">why do certain spaces, sounds, and objects make people feel like themselves?</span></p>
+    <div class="split-panel split-panel-left" aria-hidden="true"></div>
+    <div class="split-panel split-panel-right" aria-hidden="true"></div>
+    <h1 class="hero-name" aria-label="Zaira Christa">
+      <span class="hero-word hero-word-left" aria-hidden="true">ZAIR<span class="hero-terminal-a">A</span></span>
+      <span class="hero-word hero-word-right" aria-hidden="true"><span class="hero-initial-c">C</span>HRISTA</span>
+    </h1>
+    <section class="next-section" aria-label="Next section">
+      <p class="archive-kicker"><span>ENTER</span><span>THE</span></p>
+      <p class="archive-word" aria-label="Archive"><span aria-hidden="true"><span class="archive-letter">A</span><span class="archive-letter">R</span><span class="archive-letter">C</span><span class="archive-letter">H</span><span class="archive-letter">I</span><span class="archive-letter">V</span><span class="archive-letter">E</span></span></p>
+    </section>
+    <section class="discipline-section" id="archive" aria-label="Creative disciplines">
+      <p class="discipline-label discipline-label-brand"><span class="discipline-label-content"><span class="discipline-brand-first">BRAND</span><span class="discipline-brand-second">STRATEGY</span></span></p>
+      <p class="discipline-label"><span class="discipline-label-content">DESIGN</span></p>
+      <p class="discipline-label"><span class="discipline-label-content">RESEARCH</span></p>
+      <div class="portfolio-board">
+        <section class="portfolio-column" aria-label="Brand Strategy projects">
+          <div class="project-list">
+            <article class="project-card media-right" id="brand-strategy-1">
+              <div class="project-copy"><p class="project-number">01 <span></span></p><h2>BRAND STRATEGY 1</h2><p>A new narrative for a changing industry.</p><a href="#brand-strategy-1">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder landscape" role="img" aria-label="Placeholder image for Brand Strategy 1">PLACEHOLDER</div>
+            </article>
+            <article class="project-card media-left" id="brand-strategy-2">
+              <div class="project-copy"><p class="project-number">02 <span></span></p><h2>BRAND STRATEGY 2</h2><p>From subculture to global audience.</p><a href="#brand-strategy-2">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder landscape" role="img" aria-label="Placeholder image for Brand Strategy 2">PLACEHOLDER</div>
+            </article>
+            <article class="project-card media-right" id="brand-strategy-3">
+              <div class="project-copy"><p class="project-number">03 <span></span></p><h2>BRAND STRATEGY 3</h2><p>Building for what&rsquo;s next.</p><a href="#brand-strategy-3">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder landscape" role="img" aria-label="Placeholder image for Brand Strategy 3">PLACEHOLDER</div>
+            </article>
+          </div>
+        </section>
+        <section class="portfolio-column" aria-label="Design projects">
+          <div class="project-list">
+            <article class="project-card media-left" id="design-1">
+              <div class="project-copy"><p class="project-number">01 <span></span></p><h2>DESIGN 1</h2><p>Identity, objects, environment.</p><a href="#design-1">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder portrait" role="img" aria-label="Placeholder image for Design 1">PLACEHOLDER</div>
+            </article>
+            <article class="project-card media-right" id="design-2">
+              <div class="project-copy"><p class="project-number">02 <span></span></p><h2>DESIGN 2</h2><p>Everyday things, made different.</p><a href="#design-2">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder portrait" role="img" aria-label="Placeholder image for Design 2">PLACEHOLDER</div>
+            </article>
+            <article class="project-card media-left" id="design-3">
+              <div class="project-copy"><p class="project-number">03 <span></span></p><h2>DESIGN 3</h2><p>Digital worlds, real connections.</p><a href="#design-3">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder portrait" role="img" aria-label="Placeholder image for Design 3">PLACEHOLDER</div>
+            </article>
+          </div>
+        </section>
+        <section class="portfolio-column" aria-label="Research projects">
+          <div class="project-list">
+            <article class="project-card media-right" id="research-1">
+              <div class="project-copy"><p class="project-number">01 <span></span></p><h2>RESEARCH 1</h2><p>People, behaviour, possibility.</p><a href="#research-1">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder landscape" role="img" aria-label="Placeholder image for Research 1">PLACEHOLDER</div>
+            </article>
+            <article class="project-card media-left" id="research-2">
+              <div class="project-copy"><p class="project-number">02 <span></span></p><h2>RESEARCH 2</h2><p>Signals, shifts, new narratives.</p><a href="#research-2">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder portrait" role="img" aria-label="Placeholder image for Research 2">PLACEHOLDER</div>
+            </article>
+            <article class="project-card media-right" id="research-3">
+              <div class="project-copy"><p class="project-number">03 <span></span></p><h2>RESEARCH 3</h2><p>A more human tomorrow.</p><a href="#research-3">VIEW PROJECT <span aria-hidden="true">→</span></a></div>
+              <div class="project-placeholder landscape" role="img" aria-label="Placeholder image for Research 3">PLACEHOLDER</div>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+    <section class="closing-section" id="substack" aria-label="Substack">
+      <section class="closing-placeholder substack-editorial" aria-labelledby="substack-title">
+        <p class="substack-intro">And I write too</p>
+        <header class="substack-editorial-header">
+          <div class="substack-edition">
+            <span>ESSAYS ON WANTING THINGS OUT LOUD</span>
+            <span>ISSUE 01 &mdash; 2026</span>
+          </div>
+          <div class="substack-masthead-row">
+            <h2 id="substack-title">ZAI IN PROGRESS</h2>
+            <a class="substack-subscribe" href="https://zaiinprogress.substack.com/subscribe" target="_blank" rel="noreferrer">SUBSCRIBE <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </header>
+
+        <div class="substack-spread">
+          <a class="substack-feature" href="https://zaiinprogress.substack.com/p/my-spoon-cant-be-bent" target="_blank" rel="noreferrer">
+            <figure>
+              <img src="https://substack-post-media.s3.amazonaws.com/public/images/530b960d-6815-46c7-8f98-d79e4affd1a6_1080x1370.png" alt="Artwork accompanying My Spoon Can’t Be Bent" loading="lazy" decoding="async">
+            </figure>
+            <div class="substack-feature-copy">
+              <p class="substack-story-meta"><span>01</span> COVER LETTER GRAVEYARD &nbsp;/&nbsp; 14.09.26</p>
+              <h3>My Spoon<br>Can&rsquo;t Be Bent</h3>
+              <p class="substack-deck">Semantic Satiation</p>
+              <p class="substack-read">READ THE ESSAY <span aria-hidden="true">&rarr;</span></p>
+            </div>
+          </a>
+
+          <div class="substack-story-index">
+            <a class="substack-story substack-story-image" href="https://zaiinprogress.substack.com/p/torn-dresses-red-velvet-part-ii" target="_blank" rel="noreferrer">
+              <figure><img src="https://substack-post-media.s3.amazonaws.com/public/images/dcf3a0dc-8319-49f2-bec5-4b6c107620cf_468x358.png" alt="Artwork accompanying Torn Dresses – Red Velvet, Part II" loading="lazy" decoding="async"></figure>
+              <div><p class="substack-story-meta"><span>02</span> TORN DRESSES</p><h3>Red Velvet,<br>Part II</h3><p>The Grim Reaper&rsquo;s Robe.</p></div>
+            </a>
+            <a class="substack-story" href="https://zaiinprogress.substack.com/p/bitten" target="_blank" rel="noreferrer">
+              <p class="substack-story-meta"><span>03</span> DESIRE / CITY</p>
+              <h3>Bitten</h3>
+              <p>(not) A comprehensive guide to thinking about sex on the tube.</p>
+              <span class="substack-story-arrow" aria-hidden="true">&nearr;</span>
+            </a>
+            <a class="substack-story" href="https://zaiinprogress.substack.com/p/torn-dresses-red-velvet" target="_blank" rel="noreferrer">
+              <p class="substack-story-meta"><span>04</span> TORN DRESSES</p>
+              <h3>Red Velvet</h3>
+              <p>Ep. 1, Part I: Winter 2023.</p>
+              <span class="substack-story-arrow" aria-hidden="true">&nearr;</span>
+            </a>
+            <a class="substack-story" href="https://zaiinprogress.substack.com/p/im-so-in-love-with-you" target="_blank" rel="noreferrer">
+              <p class="substack-story-meta"><span>05</span> LOVE / EMBODIMENT</p>
+              <h3>I&rsquo;m so in love<br>with you</h3>
+              <p>On first love, distance and living furiously in the present.</p>
+              <span class="substack-story-arrow" aria-hidden="true">&nearr;</span>
+            </a>
+            <a class="substack-story substack-story-last" href="https://zaiinprogress.substack.com/p/torn-dresses" target="_blank" rel="noreferrer">
+              <p class="substack-story-meta"><span>06</span> SERIES PROLOGUE</p>
+              <h3>Torn Dresses</h3>
+              <p>Some dresses are torn from dancing too hard. Others are torn by men.</p>
+              <span class="substack-story-arrow" aria-hidden="true">&nearr;</span>
+            </a>
+          </div>
+        </div>
+
+        <footer class="substack-editorial-footer">
+          <span>A LITTLE FILTHY, A LITTLE TOO WELL READ.</span>
+          <a href="https://zaiinprogress.substack.com" target="_blank" rel="noreferrer">VIEW ALL WRITING <span aria-hidden="true">&rarr;</span></a>
+        </footer>
+      </section>
+      <footer class="closing-footer">
+        <div class="closing-footer-row">
+          <a href="/privacy.html" data-legal-document="privacy">PRIVACY POLICY</a>
+          <a href="/cookies.html" data-legal-document="cookies">COOKIE POLICY</a>
+          <a href="/terms.html" data-legal-document="terms">TERMS</a>
+          <a href="/accessibility.html" data-legal-document="accessibility">ACCESSIBILITY</a>
+          <button type="button" class="cookie-settings">COOKIE SETTINGS</button>
+          <span>© 2026 ZAIRA CHRISTA</span>
+        </div>
+        <div class="closing-footer-stage">
+          <p class="closing-name" aria-label="Zaira Christa">ZAIRA CHRISTA</p>
+          <section class="footer-legal-reader" role="dialog" aria-labelledby="footer-legal-title" hidden>
+            <header class="footer-legal-toolbar">
+              <p id="footer-legal-title">LEGAL</p>
+              <button type="button" class="footer-legal-close" aria-label="Close legal document">CLOSE <span aria-hidden="true">&times;</span></button>
+            </header>
+            <div class="footer-legal-content" tabindex="0">
+              <p>Loading&hellip;</p>
+            </div>
+          </section>
+        </div>
+      </footer>
+    </section>
   </main>
+  <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" hidden>
+    <div class="project-modal-shell">
+      <div class="project-modal-panel" id="project-modal-panel">
+      <div class="project-modal-toolbar">
+        <p class="project-modal-identity">BRAND STRATEGY 01</p>
+        <button class="project-modal-close" type="button" aria-label="Close project">CLOSE <span aria-hidden="true">×</span></button>
+      </div>
+
+      <div class="project-modal-content">
+        <section class="project-detail-hero" aria-label="Project introduction">
+          <figure class="project-figure project-figure-hero">
+            <div class="project-modal-placeholder">PLACEHOLDER</div>
+            <figcaption>Fig. 1&nbsp;&nbsp;&nbsp; Aesop, Paris. 2022.</figcaption>
+          </figure>
+          <div class="project-detail-intro">
+            <h1 id="project-modal-title">AËSOP</h1>
+            <p class="project-detail-subtitle">From product to philosophy.</p>
+            <p class="project-detail-lede">How Aesop built a global brand through a different kind of luxury — one rooted in intellect, design and a deeper sense of human care.</p>
+            <p class="project-detail-meta">BRAND STRATEGY <span>/</span> CULTURE <span>/</span> RETAIL EXPERIENCE <span>/</span> 2023</p>
+          </div>
+        </section>
+
+        <section class="project-story-row project-story-opening" aria-label="Context and insight">
+          <div class="project-detail-copy">
+            <p class="project-section-number">01 <span></span></p>
+            <h2>THE CONTEXT</h2>
+            <p>In a beauty industry defined by excess, Aesop emerged with a quieter proposition. Founded in 1987 in Melbourne, the brand set out to create high-quality products with considered ingredients, thoughtful design, and a deeper respect for people and place. This wasn&rsquo;t just skincare — it was a different way of thinking about care.</p>
+          </div>
+          <figure class="project-figure project-figure-product">
+            <div class="project-modal-placeholder">PLACEHOLDER</div>
+            <figcaption>Fig. 2&nbsp;&nbsp;&nbsp; Product detail.</figcaption>
+          </figure>
+          <blockquote>&ldquo;Aesop doesn&rsquo;t sell skincare. It sells a state of mind.&rdquo;<span></span></blockquote>
+          <div class="project-detail-copy project-insight">
+            <p class="project-section-number">02 <span></span></p>
+            <h2>THE INSIGHT</h2>
+            <p>People weren&rsquo;t just looking for better products — they were looking for a more meaningful relationship with them. Aesop understood that modern consumers crave slowness, substance and spaces that feel considered.</p>
+          </div>
+        </section>
+
+        <section class="project-story-row project-story-strategy" aria-label="Strategy">
+          <div class="project-detail-copy">
+            <p class="project-section-number">03 <span></span></p>
+            <h2>THE STRATEGY</h2>
+            <p>Aesop built a holistic brand world where every touchpoint reinforces the same philosophy: restraint, rigour and respect. This comes to life through:</p>
+            <ol class="project-strategy-list">
+              <li>Distinctive, timeless design</li>
+              <li>Experiential retail environments</li>
+              <li>Thoughtful storytelling</li>
+              <li>A consistent global language</li>
+            </ol>
+          </div>
+          <figure class="project-figure project-figure-wide">
+            <div class="project-modal-placeholder">PLACEHOLDER</div>
+          </figure>
+          <div class="project-margin-note">
+            <p>Design,<br>products,<br>spaces and<br>ideas in<br>dialogue.</p>
+            <p class="project-caption">Fig. 3<br>Aesop, Seoul.<br>2021.</p>
+          </div>
+        </section>
+
+        <section class="project-story-row project-story-outcome" aria-label="Outcome">
+          <figure class="project-figure project-figure-closing">
+            <div class="project-modal-placeholder"><span>Good<br>skin cares<br>further.</span></div>
+          </figure>
+          <div class="project-detail-copy">
+            <p class="project-section-number">04 <span></span></p>
+            <h2>THE OUTCOME</h2>
+            <p>Aesop has become a globally recognised brand with a devoted following, 300+ stores worldwide, and a reputation for doing things differently — proving that a brand can be both commercially successful and culturally meaningful.</p>
+          </div>
+          <div class="project-results">
+            <p><strong>300+</strong><span>STORES WORLDWIDE</span></p>
+            <p>A GLOBAL<br>CULT FOLLOWING</p>
+            <p>REDEFINING<br>MODERN LUXURY</p>
+          </div>
+        </section>
+      </div>
+
+        <nav class="project-modal-navigation" aria-label="Project navigation">
+          <button class="project-previous" type="button"><span aria-hidden="true">←</span> PREVIOUS PROJECT</button>
+          <button class="project-next" type="button">NEXT PROJECT <span aria-hidden="true">→</span></button>
+        </nav>
+      </div>
+      <div class="project-scrollbar" role="scrollbar" aria-controls="project-modal-panel" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <button class="project-scroll-up" type="button" tabindex="-1" aria-label="Scroll project up"></button>
+        <div class="project-scroll-track"><span class="project-scroll-thumb"></span></div>
+        <button class="project-scroll-down" type="button" tabindex="-1" aria-label="Scroll project down"></button>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

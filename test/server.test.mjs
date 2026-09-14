@@ -34,21 +34,50 @@ describe('portfolio server', () => {
     assert.match(response.headers.get('content-security-policy'), /default-src 'self'/);
   });
 
-  it('serves legal pages', async () => {
-    const response = await fetch(`${baseUrl}/privacy.html`);
-    assert.equal(response.status, 200);
-    assert.match(await response.text(), /Privacy policy/);
-  });
-
-  it('serves all five portfolio pages with shared navigation', async () => {
-    const pages = ['index.html', 'about.html', 'studio.html', 'archive.html', 'substack.html'];
+  it('serves legal and accessibility pages', async () => {
+    const pages = ['privacy.html', 'cookies.html', 'terms.html', 'accessibility.html'];
     for (const page of pages) {
       const response = await fetch(`${baseUrl}/${page}`);
       assert.equal(response.status, 200, page);
-      const html = await response.text();
-      assert.match(html, /aria-label="Primary navigation"/, page);
-      for (const target of pages) assert.match(html, new RegExp(`href="/${target}"`), `${page} links to ${target}`);
-      assert.match(html, /href="\/styles\.css"/, page);
+    }
+  });
+
+  it('serves the one-page portfolio and separate Studio page', async () => {
+    const homeResponse = await fetch(`${baseUrl}/index.html`);
+    assert.equal(homeResponse.status, 200);
+    const home = await homeResponse.text();
+    assert.match(home, /data-scroll-section="home"/);
+    assert.match(home, /data-scroll-section="about"/);
+    assert.match(home, /data-scroll-section="archive"/);
+    assert.match(home, /data-scroll-section="substack"/);
+    assert.match(home, /href="\/studio\.html"/);
+    assert.match(home, /class="closing-placeholder substack-editorial"/);
+    assert.match(home, /class="substack-intro">And I write too<\/p>/);
+    assert.match(home, /zaiinprogress\.substack\.com\/p\/my-spoon-cant-be-bent/);
+    assert.match(home, /zaiinprogress\.substack\.com\/subscribe/);
+    assert.doesNotMatch(home, /data-substack-feed/);
+    assert.match(home, /data-legal-document="privacy"/);
+    assert.match(home, /class="footer-legal-reader"/);
+    assert.match(home, /src="\/legal\.js\?v=\d+"/);
+
+    assert.match(homeResponse.headers.get('content-security-policy'), /substack-post-media\.s3\.amazonaws\.com/);
+
+    const legalScriptResponse = await fetch(`${baseUrl}/legal.js`);
+    assert.equal(legalScriptResponse.status, 200);
+    assert.match(await legalScriptResponse.text(), /zaira-christa-privacy-choice-v1/);
+
+    const studioResponse = await fetch(`${baseUrl}/studio.html`);
+    assert.equal(studioResponse.status, 200);
+    const studio = await studioResponse.text();
+    assert.match(studio, /href="\/index\.html\?from=studio&amp;section=about#about"/);
+    assert.match(studio, /href="\/index\.html\?from=studio&amp;section=archive#archive"/);
+    assert.match(studio, /href="\/index\.html\?from=studio&amp;section=substack#substack"/);
+  });
+
+  it('does not serve removed standalone section pages', async () => {
+    for (const page of ['about.html', 'archive.html', 'substack.html', 'archive.js']) {
+      const response = await fetch(`${baseUrl}/${page}`);
+      assert.equal(response.status, 404, page);
     }
   });
 

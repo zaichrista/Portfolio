@@ -17,7 +17,7 @@ export function setSecurityHeaders(response, { production, requestId: id }) {
     "connect-src 'self'",
     "font-src 'self'",
     "form-action 'self'",
-    "img-src 'self' data:",
+    "img-src 'self' data: https://substack-post-media.s3.amazonaws.com",
     "object-src 'none'",
     "script-src 'self'",
     "style-src 'self'"
