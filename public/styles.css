@@ -1,9 +1,12 @@
 :root {
   color-scheme: light;
+  font-size: 16px;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
   text-rendering: optimizeLegibility;
 }
 
@@ -15,6 +18,8 @@ body {
   min-height: 100vh;
   margin: 0;
   color: #101218;
+  font-size: 1.05rem;
+  line-height: 1.6;
 }
 
 .page-home { background: #f8d66d; }
@@ -45,7 +50,8 @@ a {
 }
 
 nav a {
-  padding-block: 0.25rem;
+  padding-block: 0.35rem;
+  font-weight: 600;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.2em;
 }
@@ -76,14 +82,14 @@ h1 {
 
 main > p:last-child {
   max-width: 42rem;
-  font-size: 1.125rem;
+  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
 }
 
 footer {
   display: flex;
   gap: 1rem;
   padding-block: 1rem 2rem;
-  font-size: 1rem;
+  font-size: clamp(1rem, 1.1vw, 1.15rem);
 }
 
 a:focus-visible {
@@ -206,7 +212,7 @@ a:focus-visible {
   flex-wrap: nowrap;
   gap: clamp(1rem, 2.5vw, 2.75rem);
   align-items: center;
-  font-size: clamp(1rem, 1.5vw, 1.3rem);
+  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
   line-height: 1;
   transform: translate(-50%, -50%);
   white-space: nowrap;
@@ -1976,9 +1982,9 @@ a:focus-visible {
 
   .page-home .home-header nav {
     left: 0.85rem;
-    gap: clamp(0.55rem, 3vw, 0.9rem);
+    gap: clamp(0.65rem, 3vw, 0.95rem);
     max-width: calc(100% - 4.25rem);
-    font-size: clamp(0.66rem, 3vw, 0.8rem);
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
     transform: translateY(-50%);
   }
 
