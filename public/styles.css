@@ -1939,29 +1939,20 @@ a:focus-visible {
 .page-home .hero-name {
   position: relative;
   z-index: 2;
+  display: flex;
+  gap: 0.13em;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   margin: 0;
-  text-align: center;
-}
-
-.page-home .hero-name-svg {
-  display: block;
-  width: min(100%, 1000px);
-  height: auto;
-  margin-inline: auto;
-  overflow: visible;
-  text-rendering: geometricPrecision;
-  shape-rendering: geometricPrecision;
-}
-
-.page-home .hero-name-svg text {
-  fill: currentColor;
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 240px;
+  font-size: 13.8vw;
   font-weight: 700;
   letter-spacing: -0.075em;
+  line-height: 0.72;
+  text-align: center;
   text-rendering: geometricPrecision;
-  shape-rendering: geometricPrecision;
+  white-space: nowrap;
 }
 
 .page-home .hero-word {
@@ -1977,11 +1968,11 @@ a:focus-visible {
 }
 
 .page-home .hero-word-left {
-  transform: translate3d(var(--split-offset-left), 0, 0) scaleY(1.08);
+  transform: translate3d(var(--split-offset-left), 0, 0) scaleY(2.25);
 }
 
 .page-home .hero-word-right {
-  transform: translate3d(var(--split-offset), 0, 0) scaleY(1.08);
+  transform: translate3d(var(--split-offset), 0, 0) scaleY(2.25);
 }
 
 @media (max-width: 600px) {
@@ -1999,11 +1990,11 @@ a:focus-visible {
   }
 
   .page-home .hero-word-left {
-    transform: translate3d(var(--split-offset-left), 0, 0) scaleY(1.18);
+    transform: translate3d(var(--split-offset-left), 0, 0) scaleY(3.2);
   }
 
   .page-home .hero-word-right {
-    transform: translate3d(var(--split-offset), 0, 0) scaleY(1.18);
+    transform: translate3d(var(--split-offset), 0, 0) scaleY(3.2);
   }
 
   .page-home .hero-name {
