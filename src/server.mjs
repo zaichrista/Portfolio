@@ -80,7 +80,7 @@ async function serveStatic(pathname, response) {
     if (!type) return false;
     response.statusCode = 200;
     response.setHeader('Content-Type', type);
-    response.setHeader('Cache-Control', extname(resolvedPath) === '.html' ? 'public, max-age=300' : 'public, max-age=3600');
+    response.setHeader('Cache-Control', ['.html', '.css'].includes(extname(resolvedPath)) ? 'no-cache' : 'public, max-age=3600');
     response.end(await readFile(resolvedPath));
     return true;
   } catch (error) {

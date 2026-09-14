@@ -87,3 +87,346 @@ a:focus-visible {
   outline: 3px solid currentColor;
   outline-offset: 3px;
 }
+
+/* Home */
+
+.page-home {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  background: #fff;
+  color: #050505;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.page-home .home-header {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  min-height: clamp(4.5rem, 9vh, 6.5rem);
+  padding: clamp(1.35rem, 3vh, 2.25rem) clamp(1.25rem, 2.5vw, 2.5rem);
+}
+
+.page-home .home-header nav {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  flex-wrap: nowrap;
+  gap: clamp(1rem, 2.5vw, 2.75rem);
+  align-items: center;
+  font-size: clamp(0.8rem, 1.15vw, 1.05rem);
+  line-height: 1;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+}
+
+.page-home .home-header nav a {
+  padding: 0.35rem 0;
+  text-decoration: none;
+}
+
+.page-home .home-header nav a::after {
+  display: block;
+  width: 0;
+  height: 1px;
+  margin-top: 0.22rem;
+  background: currentColor;
+  content: "";
+  transition: width 180ms ease;
+}
+
+.page-home .home-header nav a:hover::after,
+.page-home .home-header nav a:focus-visible::after,
+.page-home .home-header nav a[aria-current="page"]::after {
+  width: 100%;
+}
+
+.page-home .theme-icon {
+  position: absolute;
+  top: 50%;
+  right: clamp(1.25rem, 2.5vw, 2.5rem);
+  display: grid;
+  width: clamp(1.9rem, 2.8vw, 2.5rem);
+  height: clamp(1.9rem, 2.8vw, 2.5rem);
+  place-items: center;
+  transform: translateY(-50%);
+}
+
+.page-home .theme-icon svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.35;
+}
+
+.page-home .home-hero {
+  display: grid;
+  width: 100%;
+  min-height: 0;
+  padding: 0;
+  place-items: center;
+}
+
+.page-home .hero-name {
+  width: 100%;
+  margin: 0;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 13.8vw;
+  font-weight: 400;
+  letter-spacing: -0.075em;
+  line-height: 0.72;
+  text-align: center;
+  white-space: nowrap;
+  transform: scaleY(2.25);
+  transform-origin: center;
+}
+
+@media (max-width: 600px) {
+  .page-home .home-header {
+    min-height: 4.25rem;
+    padding-inline: 0.85rem;
+  }
+
+  .page-home .home-header nav {
+    left: 0.85rem;
+    gap: clamp(0.55rem, 3vw, 0.9rem);
+    max-width: calc(100% - 4.25rem);
+    font-size: clamp(0.66rem, 3vw, 0.8rem);
+    transform: translateY(-50%);
+  }
+
+  .page-home .theme-icon {
+    right: 0.85rem;
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  .page-home .hero-name {
+    font-size: 13.5vw;
+    transform: scaleY(3.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-home .home-header nav a::after {
+    transition: none;
+  }
+}
+
+/* Archive */
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+.page-archive {
+  background: #f7f6f2;
+  color: #1e1c1b;
+}
+
+.page-archive > header {
+  width: 100%;
+  padding: clamp(1.5rem, 4vh, 3rem) 1rem 0;
+}
+
+.page-archive > header nav {
+  justify-content: center;
+  gap: clamp(1.35rem, 4vw, 3.5rem);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+}
+
+.page-archive > header nav a {
+  text-decoration: none;
+}
+
+.page-archive > header nav a[aria-current="page"],
+.page-archive > header nav a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.3em;
+}
+
+.archive-main {
+  width: 100%;
+  min-height: 100vh;
+  padding: clamp(6rem, 13vh, 11rem) 0 clamp(4rem, 8vh, 7rem);
+}
+
+.filing-cabinet {
+  --folder-step: clamp(3.5rem, 7vw, 6.5rem);
+  width: min(88vw, 72vh, 62rem);
+  margin-inline: auto;
+}
+
+.folder-stack {
+  position: relative;
+  width: 100%;
+}
+
+.folder-stack::before {
+  display: block;
+  padding-top: calc(110% + var(--folder-step) + var(--folder-step) + var(--folder-step) + var(--folder-step));
+  content: "";
+}
+
+.file-folder {
+  --tab-left: 0%;
+  --tab-width: 29%;
+  --tab-height: clamp(2.7rem, 6vw, 4.5rem);
+  --folder-fill: #f31b50;
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  aspect-ratio: 10 / 11;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #2b1118;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transform: translateY(0);
+  transform-origin: center top;
+  transition: transform 720ms cubic-bezier(0.22, 0.68, 0.2, 1), filter 240ms ease;
+}
+
+.file-folder[data-position="0"] { z-index: 1; transform: translateY(0); }
+.file-folder[data-position="1"] { z-index: 2; transform: translateY(var(--folder-step)); }
+.file-folder[data-position="2"] { z-index: 3; transform: translateY(calc(var(--folder-step) + var(--folder-step))); }
+.file-folder[data-position="3"] { z-index: 4; transform: translateY(calc(var(--folder-step) + var(--folder-step) + var(--folder-step))); }
+.file-folder[data-position="4"] { z-index: 5; transform: translateY(calc(var(--folder-step) + var(--folder-step) + var(--folder-step) + var(--folder-step))); }
+
+.file-folder[data-index="0"] { --tab-left: 0%; --folder-fill: linear-gradient(155deg, #ff174d 0%, #e90643 55%, #d9023c 100%); }
+.file-folder[data-index="1"] { --tab-left: 17%; --folder-fill: linear-gradient(150deg, #ff4168 0%, #fb2457 62%, #eb174b 100%); }
+.file-folder[data-index="2"] { --tab-left: 32%; --folder-fill: linear-gradient(150deg, #ff708c 0%, #ff4169 58%, #f52558 100%); }
+.file-folder[data-index="3"] { --tab-left: 47%; --folder-fill: linear-gradient(150deg, #ffd4dc 0%, #f7aebd 56%, #ef91a5 100%); }
+.file-folder[data-index="4"] { --tab-left: 67%; --folder-fill: linear-gradient(150deg, #ff4f72 0%, #fd2859 60%, #eb164b 100%); }
+
+.folder-tab-cap,
+.folder-body {
+  position: absolute;
+  display: block;
+  background: var(--folder-fill);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48);
+}
+
+.folder-tab-cap {
+  z-index: 1;
+  top: 0;
+  left: var(--tab-left);
+  width: var(--tab-width);
+  height: calc(var(--tab-height) + 2rem);
+  border-radius: clamp(1.25rem, 2.8vw, 2rem) clamp(1.25rem, 2.8vw, 2rem) 0 0;
+}
+
+.folder-body {
+  z-index: 2;
+  inset: var(--tab-height) 0 0;
+  border-radius: clamp(1.25rem, 2.8vw, 2rem);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.52),
+    0 0.75rem 1.5rem rgba(55, 24, 30, 0.16),
+    0 0.15rem 0.3rem rgba(55, 24, 30, 0.18);
+}
+
+.folder-label {
+  position: absolute;
+  z-index: 3;
+  top: clamp(0.95rem, 1.8vw, 1.4rem);
+  left: calc(var(--tab-left) + 1rem);
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+  max-width: calc(var(--tab-width) - 1.5rem);
+  overflow: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.62rem, 1vw, 0.76rem);
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.folder-number {
+  font-variant-numeric: tabular-nums;
+}
+
+.file-folder:not(.is-active):hover {
+  filter: brightness(1.035);
+}
+
+.file-folder:focus-visible {
+  outline: none;
+}
+
+.file-folder:focus-visible .folder-body,
+.file-folder:focus-visible .folder-tab-cap {
+  box-shadow:
+    inset 0 0 0 3px #241217,
+    inset 0 1px 0 rgba(255, 255, 255, 0.52),
+    0 0.75rem 1.5rem rgba(55, 24, 30, 0.16);
+}
+
+.page-archive > footer {
+  justify-content: center;
+}
+
+@media (max-width: 640px) {
+  .page-archive > header nav {
+    gap: 0.65rem 1.15rem;
+    font-size: 1rem;
+  }
+
+  .archive-main {
+    padding-top: clamp(4.5rem, 11vh, 7rem);
+  }
+
+  .filing-cabinet {
+    --folder-step: clamp(2.6rem, 11vw, 4rem);
+    width: min(92vw, 65vh);
+  }
+
+  .file-folder {
+    --tab-width: 31%;
+    --tab-height: clamp(2.4rem, 11vw, 3.5rem);
+  }
+
+  .file-folder[data-index="0"] { --tab-left: 0%; }
+  .file-folder[data-index="1"] { --tab-left: 16%; }
+  .file-folder[data-index="2"] { --tab-left: 31%; }
+  .file-folder[data-index="3"] { --tab-left: 46%; }
+  .file-folder[data-index="4"] { --tab-left: 67%; }
+
+  .folder-title {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .file-folder {
+    transition: none;
+  }
+}
