@@ -146,9 +146,12 @@
   function measureSeam() {
     if (!leftWord || !rightWord || !terminalA || !initialC) return;
 
-    const leftEdge = leftWord.offsetLeft + leftWord.offsetWidth;
-    const rightEdge = rightWord.offsetLeft;
+    const leftRect = leftWord.getBoundingClientRect();
+    const rightRect = rightWord.getBoundingClientRect();
     const letterBox = terminalA.getBoundingClientRect();
+    const cBox = initialC.getBoundingClientRect();
+    const leftEdge = leftRect.right;
+    const rightEdge = rightRect.left;
     let gapMidpoint = (leftEdge + rightEdge) / 2;
     let terminalInkWidth = letterBox.width;
 
@@ -158,7 +161,6 @@
 
       const aMetrics = measureContext.measureText('A');
       const cMetrics = measureContext.measureText('C');
-      const cBox = initialC.getBoundingClientRect();
       const currentOffset = Number.parseFloat(
         window.getComputedStyle(page).getPropertyValue('--split-offset')
       ) || 0;
