@@ -1,13 +1,7 @@
 :root {
   color-scheme: light;
-  font-size: 16px;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-text-size-adjust: 100%;
-  text-size-adjust: 100%;
-  text-rendering: optimizeLegibility;
 }
 
 * {
@@ -18,8 +12,6 @@ body {
   min-height: 100vh;
   margin: 0;
   color: #101218;
-  font-size: 1.05rem;
-  line-height: 1.6;
 }
 
 .page-home { background: #f8d66d; }
@@ -50,8 +42,7 @@ a {
 }
 
 nav a {
-  padding-block: 0.35rem;
-  font-weight: 600;
+  padding-block: 0.25rem;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.2em;
 }
@@ -82,14 +73,14 @@ h1 {
 
 main > p:last-child {
   max-width: 42rem;
-  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
+  font-size: 1.125rem;
 }
 
 footer {
   display: flex;
   gap: 1rem;
   padding-block: 1rem 2rem;
-  font-size: clamp(1rem, 1.1vw, 1.15rem);
+  font-size: 0.875rem;
 }
 
 a:focus-visible {
@@ -212,7 +203,7 @@ a:focus-visible {
   flex-wrap: nowrap;
   gap: clamp(1rem, 2.5vw, 2.75rem);
   align-items: center;
-  font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+  font-size: clamp(0.8rem, 1.15vw, 1.05rem);
   line-height: 1;
   transform: translate(-50%, -50%);
   white-space: nowrap;
@@ -939,8 +930,8 @@ a:focus-visible {
   padding-bottom: clamp(0.8rem, 1.2vw, 1.25rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.42);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.68rem, 0.85vw, 0.9rem);
-  letter-spacing: 0.16em;
+  font-size: clamp(0.48rem, 0.62vw, 0.68rem);
+  letter-spacing: 0.18em;
   line-height: 1;
   white-space: nowrap;
 }
@@ -989,7 +980,7 @@ a:focus-visible {
   gap: clamp(0.4rem, 0.7vw, 0.6rem);
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.78rem, 1vw, 1rem);
+  font-size: clamp(0.62rem, 0.85vw, 0.85rem);
   letter-spacing: 0.04em;
 }
 
@@ -1049,9 +1040,8 @@ a:focus-visible {
   grid-area: 1 / 1;
   z-index: 1;
   display: grid;
-  align-self: start;
+  align-self: center;
   justify-self: start;
-  margin-top: clamp(0.5rem, 1.5vh, 1.5rem);
   width: min(43vw, 40rem);
   height: min(48vh, 32rem);
   border: 1px solid rgba(255, 255, 255, 0.72);
@@ -1067,8 +1057,8 @@ a:focus-visible {
   padding: clamp(0.7rem, 1vw, 1rem) clamp(0.85rem, 1.3vw, 1.35rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.68rem, 0.85vw, 0.9rem);
-  letter-spacing: 0.16em;
+  font-size: clamp(0.52rem, 0.62vw, 0.68rem);
+  letter-spacing: 0.18em;
 }
 
 .page-home .footer-legal-toolbar p {
@@ -1258,7 +1248,7 @@ a:focus-visible {
   .page-home .closing-contact {
     left: 1rem;
     bottom: 0.75rem;
-    font-size: 0.78rem;
+    font-size: 0.62rem;
   }
 }
 
@@ -1982,9 +1972,9 @@ a:focus-visible {
 
   .page-home .home-header nav {
     left: 0.85rem;
-    gap: clamp(0.65rem, 3vw, 0.95rem);
+    gap: clamp(0.55rem, 3vw, 0.9rem);
     max-width: calc(100% - 4.25rem);
-    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    font-size: clamp(0.66rem, 3vw, 0.8rem);
     transform: translateY(-50%);
   }
 
