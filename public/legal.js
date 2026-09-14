@@ -1,10 +1,10 @@
 (() => {
   const CONSENT_KEY = 'zaira-christa-privacy-choice-v1';
   const legalPaths = new Map([
-    ['/privacy.html', 'privacy'],
-    ['/cookies.html', 'cookies'],
-    ['/terms.html', 'terms'],
-    ['/accessibility.html', 'accessibility']
+    ['privacy.html', 'privacy'],
+    ['cookies.html', 'cookies'],
+    ['terms.html', 'terms'],
+    ['accessibility.html', 'accessibility']
   ]);
 
   function makeElement(tag, className, text) {
@@ -261,9 +261,13 @@
       const link = event.target.closest('a');
       if (!link) return;
       const path = new URL(link.href, window.location.href).pathname;
-      if (!legalPaths.has(path)) return;
+      const legalKey = path.split('/').pop();
+      if (!legalPaths.has(legalKey)) return;
       event.preventDefault();
-      const footerLink = links.find((candidate) => new URL(candidate.href).pathname === path);
+      const footerLink = links.find((candidate) => {
+        const candidateKey = new URL(candidate.href, window.location.href).pathname.split('/').pop();
+        return candidateKey === legalKey;
+      });
       if (footerLink) openDocument(footerLink);
     });
   }

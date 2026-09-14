@@ -58,7 +58,7 @@ describe('portfolio server', () => {
     assert.doesNotMatch(home, /data-substack-feed/);
     assert.match(home, /data-legal-document="privacy"/);
     assert.match(home, /class="footer-legal-reader"/);
-    assert.match(home, /src="\/legal\.js\?v=\d+"/);
+    assert.match(home, /src="\.\/legal\.js\?v=\d+"/);
 
     assert.match(homeResponse.headers.get('content-security-policy'), /substack-post-media\.s3\.amazonaws\.com/);
 
@@ -69,9 +69,9 @@ describe('portfolio server', () => {
     const studioResponse = await fetch(`${baseUrl}/studio.html`);
     assert.equal(studioResponse.status, 200);
     const studio = await studioResponse.text();
-    assert.match(studio, /href="\/index\.html\?from=studio&amp;section=about#about"/);
-    assert.match(studio, /href="\/index\.html\?from=studio&amp;section=archive#archive"/);
-    assert.match(studio, /href="\/index\.html\?from=studio&amp;section=substack#substack"/);
+    assert.match(studio, /href="\.\/index\.html\?from=studio&amp;section=about#about"/);
+    assert.match(studio, /href="\.\/index\.html\?from=studio&amp;section=archive#archive"/);
+    assert.match(studio, /href="\.\/index\.html\?from=studio&amp;section=substack#substack"/);
   });
 
   it('does not serve removed standalone section pages', async () => {
