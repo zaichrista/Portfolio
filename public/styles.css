@@ -1945,13 +1945,12 @@ a:focus-visible {
   justify-content: center;
   width: 100%;
   margin: 0;
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Times New Roman", Times, serif;
   font-size: 13.8vw;
-  font-weight: 700;
+  font-weight: 400;
   letter-spacing: -0.075em;
   line-height: 0.72;
   text-align: center;
-  text-rendering: geometricPrecision;
   white-space: nowrap;
 }
 
