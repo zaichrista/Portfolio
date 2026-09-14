@@ -2,6 +2,9 @@
   color-scheme: light;
   font-family: system-ui, sans-serif;
   line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 
 * {
@@ -80,7 +83,7 @@ footer {
   display: flex;
   gap: 1rem;
   padding-block: 1rem 2rem;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 
 a:focus-visible {
@@ -203,7 +206,7 @@ a:focus-visible {
   flex-wrap: nowrap;
   gap: clamp(1rem, 2.5vw, 2.75rem);
   align-items: center;
-  font-size: clamp(0.8rem, 1.15vw, 1.05rem);
+  font-size: clamp(1rem, 1.5vw, 1.3rem);
   line-height: 1;
   transform: translate(-50%, -50%);
   white-space: nowrap;
@@ -930,8 +933,8 @@ a:focus-visible {
   padding-bottom: clamp(0.8rem, 1.2vw, 1.25rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.42);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.48rem, 0.62vw, 0.68rem);
-  letter-spacing: 0.18em;
+  font-size: clamp(0.68rem, 0.85vw, 0.9rem);
+  letter-spacing: 0.16em;
   line-height: 1;
   white-space: nowrap;
 }
@@ -980,7 +983,7 @@ a:focus-visible {
   gap: clamp(0.4rem, 0.7vw, 0.6rem);
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.62rem, 0.85vw, 0.85rem);
+  font-size: clamp(0.78rem, 1vw, 1rem);
   letter-spacing: 0.04em;
 }
 
@@ -1040,8 +1043,9 @@ a:focus-visible {
   grid-area: 1 / 1;
   z-index: 1;
   display: grid;
-  align-self: center;
+  align-self: start;
   justify-self: start;
+  margin-top: clamp(0.5rem, 1.5vh, 1.5rem);
   width: min(43vw, 40rem);
   height: min(48vh, 32rem);
   border: 1px solid rgba(255, 255, 255, 0.72);
@@ -1057,8 +1061,8 @@ a:focus-visible {
   padding: clamp(0.7rem, 1vw, 1rem) clamp(0.85rem, 1.3vw, 1.35rem);
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.52rem, 0.62vw, 0.68rem);
-  letter-spacing: 0.18em;
+  font-size: clamp(0.68rem, 0.85vw, 0.9rem);
+  letter-spacing: 0.16em;
 }
 
 .page-home .footer-legal-toolbar p {
@@ -1248,7 +1252,7 @@ a:focus-visible {
   .page-home .closing-contact {
     left: 1rem;
     bottom: 0.75rem;
-    font-size: 0.62rem;
+    font-size: 0.78rem;
   }
 }
 
