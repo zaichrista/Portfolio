@@ -413,6 +413,39 @@ a:focus-visible {
   visibility: hidden;
 }
 
+.page-home .archive-edition,
+.page-home .archive-folio {
+  position: absolute;
+  right: clamp(1.25rem, 2.8vw, 2.75rem);
+  left: clamp(1.25rem, 2.8vw, 2.75rem);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.56rem, 0.67vw, 0.78rem);
+  letter-spacing: 0.16em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.page-home .archive-edition {
+  top: clamp(1.25rem, 3.7vh, 3rem);
+  padding-bottom: clamp(0.65rem, 1.3vh, 1rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.58);
+}
+
+.page-home .archive-folio {
+  bottom: clamp(0.8rem, 1.8vh, 1.5rem);
+  padding-top: clamp(0.45rem, 0.9vh, 0.8rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.58);
+}
+
+.page-home .archive-edition-divider {
+  padding-inline: 0.25em;
+  opacity: 0.5;
+}
+
 .page-home .discipline-label {
   position: absolute;
   z-index: 2;
@@ -461,9 +494,13 @@ a:focus-visible {
 .page-home .portfolio-board {
   position: absolute;
   z-index: 1;
-  inset: 19vh 0 5vh;
+  inset: 20vh 0 5vh;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-color: rgba(255, 255, 255, 0.45) transparent;
+  scrollbar-width: thin;
   pointer-events: auto;
   visibility: hidden;
   opacity: 0;
@@ -476,22 +513,39 @@ a:focus-visible {
 }
 
 .page-home .portfolio-column + .portfolio-column {
-  border-left: 1px solid rgba(255, 255, 255, 0.32);
+  border-left: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 .page-home .project-list {
-  position: absolute;
-  inset: 0;
+  position: relative;
+  min-height: 100%;
   display: grid;
-  grid-template-rows: repeat(4, minmax(0, 1fr));
+  grid-template-rows: repeat(4, minmax(9rem, 1fr));
 }
 
 .page-home .portfolio-column:nth-child(1) .project-list {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(15rem, 1fr));
 }
 
 .page-home .portfolio-column:nth-child(2) .project-list {
-  grid-template-rows: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(9rem, 1fr));
+}
+
+.page-home .portfolio-column:nth-child(2) .project-card {
+  gap: clamp(0.8rem, 1.4vw, 1.5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26%);
+}
+
+.page-home .portfolio-column:nth-child(2) .project-card .project-copy {
+  grid-column: 1;
+}
+
+.page-home .portfolio-column:nth-child(2) .project-card .project-placeholder {
+  grid-column: 2;
+}
+
+.page-home .portfolio-column:nth-child(2) .project-copy h2 {
+  font-size: clamp(0.98rem, 1.22vw, 1.42rem);
 }
 
 .page-home .project-card {
@@ -502,7 +556,16 @@ a:focus-visible {
   min-height: 0;
   padding-inline: clamp(1.25rem, 2.8vw, 2.75rem);
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.32);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.42);
+}
+
+.page-home .portfolio-column:nth-child(1) .project-card:first-child {
+  border-top: 3px double rgba(255, 255, 255, 0.7);
+}
+
+.page-home .portfolio-column:nth-child(2) .project-card:first-child,
+.page-home .portfolio-column:nth-child(3) .project-card:first-child {
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
 }
 
 .page-home .project-card:last-child { border-bottom: 0; }
@@ -533,8 +596,8 @@ a:focus-visible {
 }
 
 .page-home .project-card-text .project-copy h2 {
-  font-size: clamp(0.7rem, 0.92vw, 1.05rem);
-  line-height: 1.12;
+  font-size: clamp(1.05rem, 1.42vw, 1.65rem);
+  line-height: 1.02;
 }
 
 .page-home .project-copy .project-number {
@@ -542,7 +605,7 @@ a:focus-visible {
   gap: 0.65rem;
   align-items: center;
   margin-bottom: 0.6rem;
-  font-size: clamp(0.7rem, 1.05vw, 1rem);
+  font-size: clamp(0.85rem, 1.1vw, 1.2rem);
   font-style: italic;
 }
 
@@ -554,16 +617,22 @@ a:focus-visible {
 
 .page-home .project-copy h2 {
   margin-bottom: 0.45rem;
-  font-size: clamp(0.7rem, 1.05vw, 1.02rem);
+  font-size: clamp(1.05rem, 1.45vw, 1.65rem);
   font-weight: 400;
-  line-height: 1.05;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.page-home .portfolio-column:nth-child(1) .project-card:first-child h2 {
+  font-size: clamp(1.45rem, 2.4vw, 2.8rem);
+  line-height: 0.95;
 }
 
 .page-home .project-copy > p:not(.project-number) {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.55rem, 0.78vw, 0.78rem);
-  letter-spacing: 0.1em;
-  line-height: 1.32;
+  font-size: clamp(0.67rem, 0.82vw, 0.86rem);
+  letter-spacing: 0.045em;
+  line-height: 1.38;
 }
 
 .page-home .project-copy a {
@@ -572,7 +641,7 @@ a:focus-visible {
   align-items: center;
   margin-top: clamp(0.8rem, 1.5vh, 1rem);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.47rem, 0.62vw, 0.65rem);
+  font-size: clamp(0.6rem, 0.68vw, 0.74rem);
   letter-spacing: 0.18em;
   text-decoration: none;
 }
@@ -1860,17 +1929,40 @@ a:focus-visible {
 
 /* Magazine-style project blurbs */
 
+.page-home .project-editorial-masthead {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.55cqw 1.1cqw;
+  border-bottom: 3px double rgba(17, 17, 17, 0.6);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.65rem, 0.72cqw, 0.9rem);
+  letter-spacing: 0.15em;
+  line-height: 1.2;
+}
+
+.page-home .editorial-masthead-divider {
+  padding-inline: 0.2em;
+  opacity: 0.5;
+}
+
 .page-home .project-editorial {
   display: grid;
-  gap: clamp(1.5rem, 3cqw, 3rem);
+  gap: clamp(1.5rem, 2.7cqw, 3rem);
   align-items: start;
-  min-height: 58cqw;
-  padding-block: 2cqw 5cqw;
+  min-height: 50cqw;
+  padding-block: 2.2cqw 5cqw;
   grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
 }
 
 .page-home .project-editorial.is-text-only {
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.page-home .project-editorial-head {
+  grid-column: 1 / -1;
+  padding-bottom: clamp(1.5rem, 2.5cqw, 2.8rem);
+  border-bottom: 1px solid rgba(17, 17, 17, 0.48);
 }
 
 .page-home .project-editorial-figure[hidden] {
@@ -1880,6 +1972,7 @@ a:focus-visible {
 .page-home .project-editorial-figure {
   min-width: 0;
   margin: 0;
+  padding-top: 0.25cqw;
 }
 
 .page-home .project-editorial-figure .project-modal-placeholder {
@@ -1908,11 +2001,11 @@ a:focus-visible {
 }
 
 .page-home .project-editorial.is-text-only .project-editorial-body {
-  max-width: 74ch;
+  max-width: none;
 }
 
 .page-home .project-editorial-category {
-  margin: 0 0 clamp(1.5rem, 2.3cqw, 2.5rem);
+  margin: 0 0 clamp(1.2rem, 1.8cqw, 2rem);
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(0.75rem, 0.8cqw, 1rem);
   letter-spacing: 0.18em;
@@ -1920,36 +2013,43 @@ a:focus-visible {
 
 .page-home .project-editorial h1 {
   margin: 0;
-  font-size: clamp(2.6rem, 5.4cqw, 6.5rem);
+  max-width: 19ch;
+  font-size: clamp(2.8rem, 5.7cqw, 7rem);
   font-weight: 400;
   letter-spacing: -0.065em;
-  line-height: 0.9;
-  overflow-wrap: anywhere;
+  line-height: 0.88;
+  overflow-wrap: break-word;
 }
 
 .page-home .project-editorial.is-text-only h1 {
-  max-width: 17ch;
+  max-width: 20ch;
 }
 
 .page-home .project-editorial .project-detail-meta {
   display: block;
-  margin: clamp(1.5rem, 2.4cqw, 2.8rem) 0 0;
+  margin: clamp(1.5rem, 2.1cqw, 2.4rem) 0 0;
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(0.75rem, 0.82cqw, 1rem);
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   line-height: 1.4;
 }
 
 .page-home .project-editorial-copy {
-  max-width: 68ch;
-  margin-top: clamp(2rem, 3.4cqw, 4rem);
+  max-width: none;
+  margin-top: 0;
+}
+
+.page-home .project-editorial.is-text-only .project-editorial-copy {
+  columns: 2;
+  column-gap: clamp(2rem, 5cqw, 5rem);
+  column-rule: 1px solid rgba(17, 17, 17, 0.22);
 }
 
 .page-home .project-editorial-copy p {
   margin: 0 0 1.25em;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(1rem, 1.25cqw, 1.4rem);
-  line-height: 1.5;
+  font-size: clamp(1rem, 1.3cqw, 1.42rem);
+  line-height: 1.55;
 }
 
 .page-home .project-editorial-copy p:first-child {
@@ -1960,9 +2060,26 @@ a:focus-visible {
   line-height: 1.12;
 }
 
+.page-home .project-editorial.is-text-only .project-editorial-copy p:first-child {
+  column-span: all;
+  max-width: 42ch;
+}
+
+.page-home .project-editorial-copy p:not(:first-child) {
+  break-inside: avoid;
+}
+
 @container (max-width: 700px) {
   .page-home .project-editorial {
     grid-template-columns: 1fr;
+  }
+
+  .page-home .project-editorial.is-text-only .project-editorial-copy {
+    columns: 1;
+  }
+
+  .page-home .project-editorial h1 {
+    font-size: clamp(2.5rem, 8cqw, 4.5rem);
   }
 
   .page-home .project-editorial-figure.is-portrait {
@@ -2001,13 +2118,28 @@ a:focus-visible {
 }
 
 @media (max-width: 760px) {
+  .page-home .archive-edition,
+  .page-home .archive-folio {
+    right: 0.75rem;
+    left: 0.75rem;
+    font-size: 0.53rem;
+    letter-spacing: 0.09em;
+  }
+
+  .page-home .archive-edition span:nth-child(2),
+  .page-home .archive-folio span:first-child {
+    display: none;
+  }
+
+  .page-home .archive-edition { top: 1rem; }
+
   .page-home .discipline-label {
     padding-inline: 0.55rem;
     font-size: clamp(1.35rem, 7vw, 2.65rem);
   }
 
   .page-home .portfolio-board {
-    inset: 20vh 0 4vh;
+    inset: 20vh 0 5vh;
     overflow-y: auto;
     grid-template-columns: 1fr;
     overscroll-behavior: contain;
@@ -2031,6 +2163,11 @@ a:focus-visible {
     gap: 0.75rem;
     padding: 0.75rem;
     grid-template-columns: minmax(0, 1fr) minmax(5rem, 30%);
+  }
+
+  .page-home .project-copy h2,
+  .page-home .project-card-text .project-copy h2 {
+    font-size: clamp(1.15rem, 4.7vw, 1.7rem);
   }
 
   .page-home .project-card-text {
