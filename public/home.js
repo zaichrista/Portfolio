@@ -740,12 +740,8 @@
       ? (closingHasCoveredFrame ? 242 : 24)
       : 221;
     const backgroundColour = `rgb(${backgroundChannel}, ${backgroundGreen}, ${backgroundBlue})`;
-    const headerColour = archiveCoversFrame
-      ? (archiveExitProgress >= 0.9 ? 'rgb(16, 18, 24)' : 'rgb(255, 255, 255)')
-      : 'rgb(16, 18, 24)';
     page.style.backgroundColor = backgroundColour;
     if (hero) hero.style.backgroundColor = backgroundColour;
-    page.style.setProperty('--header-color', headerColour);
     if (archiveWord) archiveWord.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
     if (archiveKicker) archiveKicker.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
 
