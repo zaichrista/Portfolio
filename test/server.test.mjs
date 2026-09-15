@@ -69,21 +69,25 @@ describe('portfolio server', () => {
     assert.match(home, /class="archive-edition"/);
     assert.match(home, /class="archive-edition" aria-hidden="true">THE ARCHIVE · VOL\. 01 · 2026<\/p>/);
     assert.match(home, /class="archive-bottom-rule" aria-hidden="true"><\/div>/);
-    assert.match(home, /class="discipline-label discipline-label-brand"><span class="discipline-label-content">BRAND STRATEGY<\/span>/);
-    assert.match(home, /class="discipline-label discipline-label-design"/);
-    assert.match(home, /class="discipline-label discipline-label-research"/);
+    assert.match(home, /class="discipline-label discipline-label-brand" href="#brand-strategy-1"/);
+    assert.match(home, /class="discipline-label discipline-label-design" href="#design-2"/);
+    assert.match(home, /class="discipline-label discipline-label-research" href="#research-1"/);
     assert.match(home, /class="archive-heading-rule" aria-hidden="true"><\/div>/);
     assert.doesNotMatch(home, /archive-folio|discipline-brand-second|11 STORIES/);
     const researchColumn = home.match(/aria-label="Research projects">([\s\S]*?)<\/section>/)?.[1] || '';
     assert.doesNotMatch(researchColumn, /project-placeholder/);
-    assert.match(home, /class="project-editorial-masthead"/);
-    assert.match(home, /class="project-editorial-head"/);
-    assert.match(home, /id="project-modal-title"/);
+    assert.match(strategyColumn, /At The Reach, brand is built through hundreds of small encounters/);
+    assert.match(designColumn, /The runway became both fashion presentation and study/);
+    assert.match(researchColumn, /sonic anti-intimacy: moments when sound produces distance/);
+    assert.doesNotMatch(home, /class="project-modal"|VIEW PROJECT|READ PROJECT/);
     assert.doesNotMatch(home, /AËSOP|Aesop built a global brand/);
 
     const homeScriptResponse = await fetch(`${baseUrl}/home.js`);
     assert.equal(homeScriptResponse.status, 200);
-    assert.match(await homeScriptResponse.text(), /id: 'brand-strategy-3', category: 'BRAND STRATEGY', number: '03',[\s\S]*?title: 'Muni'/);
+    const homeScript = await homeScriptResponse.text();
+    assert.match(homeScript, /projectScrollDistance = 1\.55/);
+    assert.match(homeScript, /function navigateToProject\(index/);
+    assert.doesNotMatch(homeScript, /project-modal|openProject\(/);
 
     assert.match(homeResponse.headers.get('content-security-policy'), /substack-post-media\.s3\.amazonaws\.com/);
 

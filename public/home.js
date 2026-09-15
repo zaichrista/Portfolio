@@ -48,7 +48,7 @@
   const disciplineHoldDistance = 2;
   const disciplineMoveDistance = 2;
   const archiveDisplayHoldDistance = 0.4;
-  const projectScrollDistance = 2.35;
+  const projectScrollDistance = 1.55;
   const projectSequenceDistance = projectCards.length * projectScrollDistance;
   const archiveExitDistance = 1.35;
   const closingPlaceholderHoldDistance = 0.75;
@@ -396,6 +396,25 @@
   function updateLocation(sectionName, updateHash) {
     if (!updateHash) return;
     history.replaceState(null, '', `#${sectionName}`);
+  }
+
+  function navigateToProject(index, updateHash = true) {
+    stopTimelineNavigation();
+    completeNarrativeState();
+    const target = timelineTargets().archive
+      + index * window.innerHeight * projectScrollDistance;
+    const finish = () => {
+      setActiveTimelineLink('archive');
+      if (updateHash) history.replaceState(null, '', `#${projectCards[index].id}`);
+      requestUpdate();
+    };
+    const distance = Math.abs(target - window.scrollY) / window.innerHeight;
+    if (distance > 5) {
+      window.scrollTo(0, target);
+      finish();
+    } else {
+      animateScrollTo(target, 500 + distance * 160, finish);
+    }
   }
 
   function animateScrollTo(target, duration, onComplete) {
@@ -750,9 +769,10 @@
       blendColour(archiveColours[0], archiveColours[1], designBlend),
       archiveColours[2], researchBlend
     );
+    const aboutColour = blendColour([246, 244, 244], [228, 241, 231], easedSplit);
     const backgroundColour = archiveCoversFrame
       ? `rgb(${archiveColour.join(', ')})`
-      : 'rgb(224, 225, 221)';
+      : `rgb(${aboutColour.join(', ')})`;
     page.style.backgroundColor = backgroundColour;
     if (hero) hero.style.backgroundColor = backgroundColour;
     if (archiveWord) archiveWord.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
@@ -863,6 +883,14 @@
       navigateTimeline(link.dataset.scrollSection);
     });
   });
+  disciplineLabels.forEach((link) => {
+    const index = projectCards.findIndex((card) => `#${card.id}` === link.getAttribute('href'));
+    if (index < 0) return;
+    link.addEventListener('click', (event) => {
+      event.preventDefault();
+      navigateToProject(index);
+    });
+  });
   studioLink?.addEventListener('click', (event) => {
     event.preventDefault();
     loadStudio();
@@ -902,271 +930,10 @@
     window.requestAnimationFrame(() => runStudioLoader(initialSection));
   } else if (validInitialSection && initialSection !== 'home') {
     window.requestAnimationFrame(() => navigateTimeline(initialSection, false));
-  }
-})();
-
-(() => {
-  const modal = document.querySelector('.project-modal');
-  if (!modal) return;
-
-  const panel = modal.querySelector('.project-modal-panel');
-  const identity = modal.querySelector('.project-modal-identity');
-  const closeButton = modal.querySelector('.project-modal-close');
-  const previousButton = modal.querySelector('.project-previous');
-  const nextButton = modal.querySelector('.project-next');
-  const scrollbar = modal.querySelector('.project-scrollbar');
-  const scrollTrack = modal.querySelector('.project-scroll-track');
-  const scrollThumb = modal.querySelector('.project-scroll-thumb');
-  const scrollUp = modal.querySelector('.project-scroll-up');
-  const scrollDown = modal.querySelector('.project-scroll-down');
-  const editorial = modal.querySelector('.project-editorial');
-  const editorialFigure = modal.querySelector('.project-editorial-figure');
-  const editorialCategory = modal.querySelector('.project-editorial-category');
-  const editorialTitle = modal.querySelector('#project-modal-title');
-  const editorialMeta = modal.querySelector('.project-detail-meta');
-  const editorialCopy = modal.querySelector('.project-editorial-copy');
-  const projectLinks = Array.from(document.querySelectorAll('.project-copy a'));
-  const backgroundRegions = [
-    document.querySelector('.home-header'),
-    document.querySelector('.home-hero')
-  ].filter(Boolean);
-  const projects = [
-    {
-      id: 'brand-strategy-1', category: 'BRAND STRATEGY', number: '01',
-      title: 'The Reach Brasserie', meta: 'Hospitality · Brand Experience · Ongoing', media: 'landscape',
-      copy: [
-        `A restaurant is never only a logo.`,
-        `At The Reach, brand is built through hundreds of small encounters: the menu in your hand, the cocktail arriving at the table, the photograph that made you book, the tone of the signage, the rhythm of service. My work sits inside that intersection between strategy and reality.`,
-        `From drinks development and visual direction to content, menus and guest experience, The Reach became an exercise in translating a brand idea into something people could actually walk into, order from and remember.`
-      ]
-    },
-    {
-      id: 'brand-strategy-2', category: 'BRAND STRATEGY', number: '02',
-      title: 'Bekaa', meta: 'Hospitality Concept · Brand Strategy · Cultural Research', media: 'landscape',
-      copy: [
-        `What if a bar behaved more like an archive?`,
-        `Bekaa is a speculative listening bar and cultural venue built around music, memory and communal ritual. Developed through research into hospitality, nightlife and cultural consumption, the project asks how a physical venue might create value not simply by selling drinks, but by collecting, staging and circulating culture.`,
-        `The result is part bar, part listening room, part living archive: a brand built through sound, atmosphere and the accumulation of shared experience.`
-      ]
-    },
-    {
-      id: 'brand-strategy-3', category: 'BRAND STRATEGY', number: '03',
-      title: 'Muni', meta: 'Fashion System · Product Design · Brand Concept', media: 'portrait',
-      copy: [
-        `Muni begins with a zipper.`,
-        `Hidden within the seams of a garment, a discreet fastening system allows sleeves, collars and other components to be removed, exchanged and reassembled. One piece becomes many; the wearer becomes part of the design process.`,
-        `Rather than treating clothing as a finished object, Muni imagines fashion as a modular language.`,
-        `The designer provides the grammar. The wearer writes the sentence.`
-      ]
-    },
-    {
-      id: 'design-2', category: 'DESIGN', number: '01',
-      title: 'Kisses from Parikyo', meta: 'Fashion Direction · World-Building · Concept Collection', media: 'portrait',
-      copy: [
-        `Paris and Tokyo are separated by almost ten thousand kilometres. Parikyo exists somewhere in between.`,
-        `Kisses from Parikyo imagines a fictional city formed from the collision of couture, streetwear, subculture and romance. Parisian codes meet Tokyo silhouettes; references migrate, mutate and become something new.`,
-        `The project is less interested in reproducing either city than in constructing an entirely new one, using fashion as architecture for an invented world.`
-      ]
-    },
-    {
-      id: 'design-3', category: 'DESIGN', number: '02',
-      title: 'FW23: Women, Studied', meta: 'Runway Collection · Fashion Direction', media: 'portrait',
-      copy: [
-        `To look at a woman is never neutral.`,
-        `Women, Studied explores femininity through observation: who is looking, who is being looked at, and what happens when the subject begins to control the gaze.`,
-        `Drawing from classical representations of Venus alongside the women closest to me, the collection moves between exposure and concealment, softness and defence.`,
-        `The runway became both fashion presentation and study: women presented as subjects rather than objects of observation.`
-      ]
-    },
-    {
-      id: 'design-4', category: 'DESIGN', number: '03',
-      title: 'SS24: Reflections on Glamour', meta: 'Runway Collection · Creative Direction', media: 'portrait',
-      copy: [
-        `Glamour has always promised transformation.`,
-        `It also depends on distance.`,
-        `Reflections on Glamour takes the visual language of mid-century elegance: polished silhouettes, spectacle, femininity, perfection, and begins to destabilise it.`,
-        `Familiar codes are stretched, interrupted and reassembled, examining the tension between glamour as fantasy and glamour as performance.`,
-        `The collection asks what remains once perfection begins to crack.`
-      ]
-    },
-    {
-      id: 'design-5', category: 'DESIGN', number: '04',
-      title: 'A Voyage in Ascent', meta: 'Oxford Fashion Gala · Creative & Marketing Direction', media: 'portrait',
-      copy: [
-        `A runway lasts minutes. Its world begins long before the first model walks.`,
-        `For the Oxford Fashion Gala, I worked across the creative ecosystem surrounding the show: concept development, casting, styling, set direction, choreography, photography and campaign identity.`,
-        `A Voyage in Ascent approached the event as a single narrative rather than a series of disconnected outputs.`,
-        `The challenge was continuity: ensuring that the photograph, the poster, the model, the room and the runway all appeared to belong to the same universe.`
-      ]
-    },
-    {
-      id: 'research-1', category: 'RESEARCH', number: '01',
-      title: 'Tokyo Drift: The Sonic Graffiti of the Tokyoite Underground',
-      meta: 'Oxford BA Dissertation · Ethnography · Music & Subculture', media: null,
-      copy: [
-        `For three weeks, Tokyo became my field site.`,
-        `Moving between clubs in Shibuya and Shimokitazawa, I studied how underground communities communicate belonging through music, clothing, movement and space.`,
-        `Interviews, participant observation and fieldnotes eventually produced the idea of sonic graffiti: music understood as a temporary mark left on a city, a way for communities to claim space without permanently altering it.`,
-        `A dissertation about nightlife became a study of how cities are written through sound.`
-      ]
-    },
-    {
-      id: 'research-2', category: 'RESEARCH', number: '02',
-      title: 'What, in Sonic Terms, Might Characterise the Opposite of Intimacy?',
-      meta: 'Sound Studies · Original Theory', media: null,
-      copy: [
-        `Sound studies often asks how listening creates intimacy.`,
-        `I wanted to ask the opposite question.`,
-        `This essay develops the idea of sonic anti-intimacy: moments when sound produces distance rather than connection.`,
-        `From headphones and algorithmic playlists to Muzak, virtual assistants and engineered silence, the research examines how listening technologies can isolate, dominate or detach us from the environments and people around us.`,
-        `Sometimes sound brings us closer.`,
-        `Sometimes it builds the wall.`
-      ]
-    },
-    {
-      id: 'research-3', category: 'RESEARCH', number: '03',
-      title: 'Is Pettman Right? Sonic Intimacy, ASMR, and the Hypersexualised Ear',
-      meta: 'Sound Studies · Media Theory', media: null,
-      copy: [
-        `Few technologies feel as private as headphones.`,
-        `A voice can whisper centimetres from your ear while the speaker sits thousands of kilometres away.`,
-        `Through ASMR, binaural recording and digitally mediated listening, this essay examines how technology manufactures sensations of closeness between strangers.`,
-        `It asks whether the ear, often described as indiscriminate and permanently open, has become increasingly curated.`,
-        `Digital intimacy may feel spontaneous.`,
-        `Its architecture is anything but.`
-      ]
-    },
-    {
-      id: 'research-4', category: 'RESEARCH', number: '04',
-      title: 'Echoes: The Fragility of the Human Psyche',
-      meta: 'Musicology · Psychoanalysis · Visual Culture', media: null,
-      copy: [
-        `Pink Floyd's Echoes lasts more than twenty-three minutes.`,
-        `Inside it is an entire psychological landscape.`,
-        `Using Lacanian psychoanalysis alongside surrealist works by Kay Sage, Yves Tanguy and Salvador Dalí, this essay reads the track as an exploration of fragmentation, recognition and the unstable construction of the self.`,
-        `Sound and image become parallel languages for the same question:`,
-        `how secure is the person we believe ourselves to be?`
-      ]
+  } else {
+    const projectIndex = projectCards.findIndex((card) => card.id === initialSection);
+    if (projectIndex >= 0) {
+      window.requestAnimationFrame(() => navigateToProject(projectIndex, false));
     }
-  ];
-  let currentProject = 0;
-  let returnFocus = null;
-  let dragStartY = 0;
-  let dragStartScroll = 0;
-
-  function updateScrollbar() {
-    if (!scrollTrack || !scrollThumb || !scrollbar) return;
-    const maximumScroll = Math.max(panel.scrollHeight - panel.clientHeight, 0);
-    const trackHeight = scrollTrack.clientHeight;
-    const thumbHeight = maximumScroll === 0
-      ? trackHeight
-      : Math.max(trackHeight * panel.clientHeight / panel.scrollHeight, trackHeight * 0.08);
-    const thumbTravel = Math.max(trackHeight - thumbHeight, 0);
-    const scrollProgress = maximumScroll === 0 ? 0 : panel.scrollTop / maximumScroll;
-    scrollThumb.style.height = `${thumbHeight.toFixed(2)}px`;
-    scrollThumb.style.top = `${(thumbTravel * scrollProgress).toFixed(2)}px`;
-    scrollbar.setAttribute('aria-valuenow', `${Math.round(scrollProgress * 100)}`);
   }
-
-  function showProject(index, resetScroll = true) {
-    currentProject = Math.min(Math.max(index, 0), projects.length - 1);
-    const project = projects[currentProject];
-    identity.textContent = `${project.category} ${project.number}`;
-    editorialCategory.textContent = `${project.category} / ${project.number}`;
-    editorialTitle.textContent = project.title;
-    editorialMeta.textContent = project.meta;
-    editorial.classList.toggle('is-text-only', !project.media);
-    editorialFigure.hidden = !project.media;
-    editorialFigure.classList.toggle('is-portrait', project.media === 'portrait');
-    editorialFigure.classList.toggle('is-landscape', project.media === 'landscape');
-    editorialFigure.querySelector('figcaption').textContent = `${project.title} — IMAGE TO COME`;
-    editorialCopy.replaceChildren(...project.copy.map((paragraph) => {
-      const element = document.createElement('p');
-      element.textContent = paragraph;
-      return element;
-    }));
-    previousButton.disabled = currentProject === 0;
-    nextButton.disabled = currentProject === projects.length - 1;
-    previousButton.setAttribute('aria-label', currentProject === 0
-      ? 'No previous project'
-      : `View ${projects[currentProject - 1].title}`);
-    nextButton.setAttribute('aria-label', currentProject === projects.length - 1
-      ? 'No next project'
-      : `View ${projects[currentProject + 1].title}`);
-    if (resetScroll) panel.scrollTop = 0;
-    window.requestAnimationFrame(updateScrollbar);
-  }
-
-  function openProject(index, trigger) {
-    returnFocus = trigger;
-    showProject(index, true);
-    modal.hidden = false;
-    document.body.classList.add('project-modal-open');
-    backgroundRegions.forEach((region) => { region.inert = true; });
-    window.requestAnimationFrame(updateScrollbar);
-    closeButton.focus({ preventScroll: true });
-  }
-
-  function closeProject() {
-    modal.hidden = true;
-    document.body.classList.remove('project-modal-open');
-    backgroundRegions.forEach((region) => { region.inert = false; });
-    if (returnFocus) returnFocus.focus({ preventScroll: true });
-  }
-
-  projectLinks.forEach((link) => {
-    const projectId = link.getAttribute('href')?.replace(/^#/, '');
-    const index = projects.findIndex((project) => project.id === projectId);
-    if (index < 0) return;
-    link.addEventListener('click', (event) => {
-      event.preventDefault();
-      openProject(index, link);
-    });
-  });
-
-  closeButton.addEventListener('click', closeProject);
-  previousButton.addEventListener('click', () => showProject(currentProject - 1));
-  nextButton.addEventListener('click', () => showProject(currentProject + 1));
-  panel.addEventListener('scroll', updateScrollbar, { passive: true });
-  scrollUp?.addEventListener('click', () => panel.scrollBy({ top: -panel.clientHeight * 0.24, behavior: 'smooth' }));
-  scrollDown?.addEventListener('click', () => panel.scrollBy({ top: panel.clientHeight * 0.24, behavior: 'smooth' }));
-  scrollTrack?.addEventListener('click', (event) => {
-    if (event.target === scrollThumb) return;
-    const trackBox = scrollTrack.getBoundingClientRect();
-    const ratio = Math.min(Math.max((event.clientY - trackBox.top) / trackBox.height, 0), 1);
-    panel.scrollTo({ top: ratio * (panel.scrollHeight - panel.clientHeight), behavior: 'smooth' });
-  });
-  scrollThumb?.addEventListener('pointerdown', (event) => {
-    dragStartY = event.clientY;
-    dragStartScroll = panel.scrollTop;
-    scrollThumb.setPointerCapture(event.pointerId);
-  });
-  scrollThumb?.addEventListener('pointermove', (event) => {
-    if (!scrollThumb.hasPointerCapture(event.pointerId)) return;
-    const maximumScroll = Math.max(panel.scrollHeight - panel.clientHeight, 0);
-    const thumbTravel = Math.max(scrollTrack.clientHeight - scrollThumb.offsetHeight, 1);
-    panel.scrollTop = dragStartScroll + (event.clientY - dragStartY) / thumbTravel * maximumScroll;
-  });
-  window.addEventListener('resize', updateScrollbar);
-  modal.addEventListener('click', (event) => {
-    if (event.target === modal) closeProject();
-  });
-  document.addEventListener('keydown', (event) => {
-    if (modal.hidden) return;
-    if (event.key === 'Escape') closeProject();
-    if (event.key === 'ArrowLeft' && !previousButton.disabled) showProject(currentProject - 1);
-    if (event.key === 'ArrowRight' && !nextButton.disabled) showProject(currentProject + 1);
-    if (event.key === 'Tab') {
-      const controls = [closeButton, previousButton, nextButton].filter((button) => !button.disabled);
-      const firstControl = controls[0];
-      const lastControl = controls[controls.length - 1];
-      if (event.shiftKey && document.activeElement === firstControl) {
-        event.preventDefault();
-        lastControl.focus();
-      } else if (!event.shiftKey && document.activeElement === lastControl) {
-        event.preventDefault();
-        firstControl.focus();
-      }
-    }
-  });
 })();
