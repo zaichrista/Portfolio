@@ -461,7 +461,7 @@ a:focus-visible {
 .page-home .portfolio-board {
   position: absolute;
   z-index: 1;
-  inset: 9vh 0 7vh;
+  inset: 19vh 0 5vh;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   pointer-events: auto;
@@ -482,27 +482,34 @@ a:focus-visible {
 .page-home .project-list {
   position: absolute;
   inset: 0;
+  display: grid;
+  grid-template-rows: repeat(4, minmax(0, 1fr));
+}
+
+.page-home .portfolio-column:nth-child(1) .project-list {
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+}
+
+.page-home .portfolio-column:nth-child(2) .project-list {
+  grid-template-rows: repeat(5, minmax(0, 1fr));
 }
 
 .page-home .project-card {
-  position: absolute;
-  right: clamp(1.25rem, 2.8vw, 2.75rem);
-  left: clamp(1.25rem, 2.8vw, 2.75rem);
+  position: relative;
   display: grid;
   gap: clamp(0.75rem, 1.8vw, 1.75rem);
   align-items: center;
+  min-height: 0;
+  padding-inline: clamp(1.25rem, 2.8vw, 2.75rem);
   grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.32);
 }
 
-.page-home .portfolio-column:nth-child(1) .project-card:nth-child(1) { top: 27%; }
-.page-home .portfolio-column:nth-child(1) .project-card:nth-child(2) { top: 53.5%; }
-.page-home .portfolio-column:nth-child(1) .project-card:nth-child(3) { top: 78%; }
-.page-home .portfolio-column:nth-child(2) .project-card:nth-child(1) { top: 20%; }
-.page-home .portfolio-column:nth-child(2) .project-card:nth-child(2) { top: 47%; }
-.page-home .portfolio-column:nth-child(2) .project-card:nth-child(3) { top: 74%; }
-.page-home .portfolio-column:nth-child(3) .project-card:nth-child(1) { top: 30.5%; }
-.page-home .portfolio-column:nth-child(3) .project-card:nth-child(2) { top: 52%; }
-.page-home .portfolio-column:nth-child(3) .project-card:nth-child(3) { top: 76%; }
+.page-home .project-card:last-child { border-bottom: 0; }
+
+.page-home .project-card-text {
+  grid-template-columns: 1fr;
+}
 
 .page-home .project-copy {
   min-width: 0;
@@ -523,6 +530,11 @@ a:focus-visible {
 .page-home .project-copy p,
 .page-home .project-copy h2 {
   margin: 0;
+}
+
+.page-home .project-card-text .project-copy h2 {
+  font-size: clamp(0.7rem, 0.92vw, 1.05rem);
+  line-height: 1.12;
 }
 
 .page-home .project-copy .project-number {
@@ -590,34 +602,18 @@ a:focus-visible {
   justify-self: center;
 }
 
-.page-home .portfolio-column:nth-child(1) .project-card:nth-child(1) .project-placeholder {
-  height: 22vh;
-  max-height: none;
-  aspect-ratio: auto;
-}
-
-.page-home .portfolio-column:nth-child(1) .project-card:nth-child(2) .project-placeholder,
-.page-home .portfolio-column:nth-child(1) .project-card:nth-child(3) .project-placeholder {
-  height: 19vh;
-  max-height: none;
-  aspect-ratio: auto;
+.page-home .portfolio-column:nth-child(1) .project-placeholder {
+  height: auto;
+  max-height: 24vh;
+  aspect-ratio: 1.5 / 1;
 }
 
 .page-home .portfolio-column:nth-child(2) .project-placeholder {
-  height: 22vh;
-  max-height: none;
-  aspect-ratio: auto;
-}
-
-.page-home .portfolio-column:nth-child(3) .project-card:nth-child(1) .project-placeholder {
-  height: 34vh;
-  max-height: none;
-  aspect-ratio: auto;
-  transform: translateY(-18.5vh);
-}
-
-.page-home .portfolio-column:nth-child(3) .project-card:nth-child(1) .project-copy {
-  align-self: start;
+  width: auto;
+  height: min(11vh, 100%);
+  max-width: 100%;
+  max-height: 11vh;
+  aspect-ratio: 0.76 / 1;
 }
 
 /* Closing sequence */
@@ -1620,7 +1616,7 @@ a:focus-visible {
   border-bottom: 1px solid rgba(17, 17, 17, 0.45);
   background: #f0eee6;
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.72cqw;
+  font-size: clamp(0.65rem, 0.72cqw, 0.9rem);
   letter-spacing: 0.22em;
 }
 
@@ -1862,6 +1858,119 @@ a:focus-visible {
   letter-spacing: 0.12em;
 }
 
+/* Magazine-style project blurbs */
+
+.page-home .project-editorial {
+  display: grid;
+  gap: clamp(1.5rem, 3cqw, 3rem);
+  align-items: start;
+  min-height: 58cqw;
+  padding-block: 2cqw 5cqw;
+  grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
+}
+
+.page-home .project-editorial.is-text-only {
+  grid-template-columns: 1fr;
+}
+
+.page-home .project-editorial-figure[hidden] {
+  display: none;
+}
+
+.page-home .project-editorial-figure {
+  min-width: 0;
+  margin: 0;
+}
+
+.page-home .project-editorial-figure .project-modal-placeholder {
+  width: 100%;
+  aspect-ratio: 1.5 / 1;
+}
+
+.page-home .project-editorial-figure.is-portrait {
+  width: min(100%, 26cqw);
+  justify-self: center;
+}
+
+.page-home .project-editorial-figure.is-portrait .project-modal-placeholder {
+  aspect-ratio: 0.76 / 1;
+}
+
+.page-home .project-editorial-figure figcaption {
+  margin-top: 0.6rem;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.7rem, 0.7cqw, 0.9rem);
+  letter-spacing: 0.12em;
+}
+
+.page-home .project-editorial-body {
+  min-width: 0;
+}
+
+.page-home .project-editorial.is-text-only .project-editorial-body {
+  max-width: 74ch;
+}
+
+.page-home .project-editorial-category {
+  margin: 0 0 clamp(1.5rem, 2.3cqw, 2.5rem);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.75rem, 0.8cqw, 1rem);
+  letter-spacing: 0.18em;
+}
+
+.page-home .project-editorial h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 5.4cqw, 6.5rem);
+  font-weight: 400;
+  letter-spacing: -0.065em;
+  line-height: 0.9;
+  overflow-wrap: anywhere;
+}
+
+.page-home .project-editorial.is-text-only h1 {
+  max-width: 17ch;
+}
+
+.page-home .project-editorial .project-detail-meta {
+  display: block;
+  margin: clamp(1.5rem, 2.4cqw, 2.8rem) 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(0.75rem, 0.82cqw, 1rem);
+  letter-spacing: 0.08em;
+  line-height: 1.4;
+}
+
+.page-home .project-editorial-copy {
+  max-width: 68ch;
+  margin-top: clamp(2rem, 3.4cqw, 4rem);
+}
+
+.page-home .project-editorial-copy p {
+  margin: 0 0 1.25em;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(1rem, 1.25cqw, 1.4rem);
+  line-height: 1.5;
+}
+
+.page-home .project-editorial-copy p:first-child {
+  margin-bottom: 1.1em;
+  font-family: "Times New Roman", Times, serif;
+  font-size: clamp(1.5rem, 2.35cqw, 2.9rem);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
+}
+
+@container (max-width: 700px) {
+  .page-home .project-editorial {
+    grid-template-columns: 1fr;
+  }
+
+  .page-home .project-editorial-figure.is-portrait {
+    width: min(55%, 16rem);
+    justify-self: start;
+  }
+}
+
 .page-home .project-modal-navigation {
   display: flex;
   justify-content: space-between;
@@ -1869,7 +1978,7 @@ a:focus-visible {
   padding-block: 1.05cqw 1.2cqw;
   border-top: 1px solid rgba(17, 17, 17, 0.45);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 0.58cqw;
+  font-size: clamp(0.65rem, 0.58cqw, 0.8rem);
   letter-spacing: 0.18em;
 }
 
@@ -1898,26 +2007,57 @@ a:focus-visible {
   }
 
   .page-home .portfolio-board {
-    inset-block-start: 10vh;
+    inset: 20vh 0 4vh;
+    overflow-y: auto;
+    grid-template-columns: 1fr;
+    overscroll-behavior: contain;
+  }
+
+  .page-home .portfolio-column + .portfolio-column {
+    border-top: 1px solid rgba(255, 255, 255, 0.32);
+    border-left: 0;
+  }
+
+  .page-home .project-list,
+  .page-home .portfolio-column:nth-child(1) .project-list,
+  .page-home .portfolio-column:nth-child(2) .project-list {
+    position: relative;
+    inset: auto;
+    grid-template-rows: none;
+    grid-auto-rows: minmax(8.5rem, auto);
   }
 
   .page-home .project-card {
-    right: 0.55rem;
-    left: 0.55rem;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    grid-template-columns: minmax(0, 1fr) minmax(5rem, 30%);
   }
 
-  .page-home .project-card {
-    gap: 0.35rem;
+  .page-home .project-card-text {
     grid-template-columns: 1fr;
   }
 
-  .page-home .project-card .project-copy,
-  .page-home .project-card .project-placeholder {
+  .page-home .project-card.media-left .project-copy {
     grid-column: 1;
   }
 
-  .page-home .project-placeholder {
-    display: none;
+  .page-home .project-card.media-left .project-placeholder {
+    grid-column: 2;
+  }
+
+  .page-home .portfolio-column:nth-child(1) .project-placeholder,
+  .page-home .portfolio-column:nth-child(2) .project-placeholder {
+    height: auto;
+    max-height: 7rem;
+  }
+
+  .page-home .portfolio-column:nth-child(1) .project-placeholder {
+    width: 100%;
+  }
+
+  .page-home .portfolio-column:nth-child(2) .project-placeholder {
+    width: min(100%, 5rem);
+    aspect-ratio: 0.76 / 1;
   }
 }
 

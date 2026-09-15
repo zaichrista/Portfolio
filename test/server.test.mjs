@@ -59,6 +59,13 @@ describe('portfolio server', () => {
     assert.match(home, /data-legal-document="privacy"/);
     assert.match(home, /class="footer-legal-reader"/);
     assert.match(home, /src="\.\/legal\.js\?v=\d+"/);
+    assert.equal((home.match(/class="project-card(?: [^"]+)?" id="brand-strategy-\d+"/g) || []).length, 2);
+    assert.equal((home.match(/class="project-card(?: [^"]+)?" id="design-\d+"/g) || []).length, 5);
+    assert.equal((home.match(/class="project-card(?: [^"]+)?" id="research-\d+"/g) || []).length, 4);
+    const researchColumn = home.match(/aria-label="Research projects">([\s\S]*?)<\/section>/)?.[1] || '';
+    assert.doesNotMatch(researchColumn, /project-placeholder/);
+    assert.match(home, /id="project-modal-title"/);
+    assert.doesNotMatch(home, /AËSOP|Aesop built a global brand/);
 
     assert.match(homeResponse.headers.get('content-security-policy'), /substack-post-media\.s3\.amazonaws\.com/);
 

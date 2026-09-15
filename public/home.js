@@ -897,21 +897,135 @@
   const scrollThumb = modal.querySelector('.project-scroll-thumb');
   const scrollUp = modal.querySelector('.project-scroll-up');
   const scrollDown = modal.querySelector('.project-scroll-down');
+  const editorial = modal.querySelector('.project-editorial');
+  const editorialFigure = modal.querySelector('.project-editorial-figure');
+  const editorialCategory = modal.querySelector('.project-editorial-category');
+  const editorialTitle = modal.querySelector('#project-modal-title');
+  const editorialMeta = modal.querySelector('.project-detail-meta');
+  const editorialCopy = modal.querySelector('.project-editorial-copy');
   const projectLinks = Array.from(document.querySelectorAll('.project-copy a'));
   const backgroundRegions = [
     document.querySelector('.home-header'),
     document.querySelector('.home-hero')
   ].filter(Boolean);
   const projects = [
-    ['brand-strategy-1', 'BRAND STRATEGY', '01'],
-    ['brand-strategy-2', 'BRAND STRATEGY', '02'],
-    ['brand-strategy-3', 'BRAND STRATEGY', '03'],
-    ['design-1', 'DESIGN', '01'],
-    ['design-2', 'DESIGN', '02'],
-    ['design-3', 'DESIGN', '03'],
-    ['research-1', 'RESEARCH', '01'],
-    ['research-2', 'RESEARCH', '02'],
-    ['research-3', 'RESEARCH', '03']
+    {
+      id: 'brand-strategy-1', category: 'BRAND STRATEGY', number: '01',
+      title: 'The Reach Brasserie', meta: 'Hospitality · Brand Experience · Ongoing', media: 'landscape',
+      copy: [
+        `A restaurant is never only a logo.`,
+        `At The Reach, brand is built through hundreds of small encounters: the menu in your hand, the cocktail arriving at the table, the photograph that made you book, the tone of the signage, the rhythm of service. My work sits inside that intersection between strategy and reality.`,
+        `From drinks development and visual direction to content, menus and guest experience, The Reach became an exercise in translating a brand idea into something people could actually walk into, order from and remember.`
+      ]
+    },
+    {
+      id: 'brand-strategy-2', category: 'BRAND STRATEGY', number: '02',
+      title: 'Bekaa', meta: 'Hospitality Concept · Brand Strategy · Cultural Research', media: 'landscape',
+      copy: [
+        `What if a bar behaved more like an archive?`,
+        `Bekaa is a speculative listening bar and cultural venue built around music, memory and communal ritual. Developed through research into hospitality, nightlife and cultural consumption, the project asks how a physical venue might create value not simply by selling drinks, but by collecting, staging and circulating culture.`,
+        `The result is part bar, part listening room, part living archive: a brand built through sound, atmosphere and the accumulation of shared experience.`
+      ]
+    },
+    {
+      id: 'design-1', category: 'DESIGN', number: '01',
+      title: 'Muni', meta: 'Fashion System · Product Design · Brand Concept', media: 'portrait',
+      copy: [
+        `Muni begins with a zipper.`,
+        `Hidden within the seams of a garment, a discreet fastening system allows sleeves, collars and other components to be removed, exchanged and reassembled. One piece becomes many; the wearer becomes part of the design process.`,
+        `Rather than treating clothing as a finished object, Muni imagines fashion as a modular language.`,
+        `The designer provides the grammar. The wearer writes the sentence.`
+      ]
+    },
+    {
+      id: 'design-2', category: 'DESIGN', number: '02',
+      title: 'Kisses from Parikyo', meta: 'Fashion Direction · World-Building · Concept Collection', media: 'portrait',
+      copy: [
+        `Paris and Tokyo are separated by almost ten thousand kilometres. Parikyo exists somewhere in between.`,
+        `Kisses from Parikyo imagines a fictional city formed from the collision of couture, streetwear, subculture and romance. Parisian codes meet Tokyo silhouettes; references migrate, mutate and become something new.`,
+        `The project is less interested in reproducing either city than in constructing an entirely new one, using fashion as architecture for an invented world.`
+      ]
+    },
+    {
+      id: 'design-3', category: 'DESIGN', number: '03',
+      title: 'FW23: Women, Studied', meta: 'Runway Collection · Fashion Direction', media: 'portrait',
+      copy: [
+        `To look at a woman is never neutral.`,
+        `Women, Studied explores femininity through observation: who is looking, who is being looked at, and what happens when the subject begins to control the gaze.`,
+        `Drawing from classical representations of Venus alongside the women closest to me, the collection moves between exposure and concealment, softness and defence.`,
+        `The runway became both fashion presentation and study: women presented as subjects rather than objects of observation.`
+      ]
+    },
+    {
+      id: 'design-4', category: 'DESIGN', number: '04',
+      title: 'SS24: Reflections on Glamour', meta: 'Runway Collection · Creative Direction', media: 'portrait',
+      copy: [
+        `Glamour has always promised transformation.`,
+        `It also depends on distance.`,
+        `Reflections on Glamour takes the visual language of mid-century elegance: polished silhouettes, spectacle, femininity, perfection, and begins to destabilise it.`,
+        `Familiar codes are stretched, interrupted and reassembled, examining the tension between glamour as fantasy and glamour as performance.`,
+        `The collection asks what remains once perfection begins to crack.`
+      ]
+    },
+    {
+      id: 'design-5', category: 'DESIGN', number: '05',
+      title: 'A Voyage in Ascent', meta: 'Oxford Fashion Gala · Creative & Marketing Direction', media: 'portrait',
+      copy: [
+        `A runway lasts minutes. Its world begins long before the first model walks.`,
+        `For the Oxford Fashion Gala, I worked across the creative ecosystem surrounding the show: concept development, casting, styling, set direction, choreography, photography and campaign identity.`,
+        `A Voyage in Ascent approached the event as a single narrative rather than a series of disconnected outputs.`,
+        `The challenge was continuity: ensuring that the photograph, the poster, the model, the room and the runway all appeared to belong to the same universe.`
+      ]
+    },
+    {
+      id: 'research-1', category: 'RESEARCH', number: '01',
+      title: 'Tokyo Drift: The Sonic Graffiti of the Tokyoite Underground',
+      meta: 'Oxford BA Dissertation · Ethnography · Music & Subculture', media: null,
+      copy: [
+        `For three weeks, Tokyo became my field site.`,
+        `Moving between clubs in Shibuya and Shimokitazawa, I studied how underground communities communicate belonging through music, clothing, movement and space.`,
+        `Interviews, participant observation and fieldnotes eventually produced the idea of sonic graffiti: music understood as a temporary mark left on a city, a way for communities to claim space without permanently altering it.`,
+        `A dissertation about nightlife became a study of how cities are written through sound.`
+      ]
+    },
+    {
+      id: 'research-2', category: 'RESEARCH', number: '02',
+      title: 'What, in Sonic Terms, Might Characterise the Opposite of Intimacy?',
+      meta: 'Sound Studies · Original Theory', media: null,
+      copy: [
+        `Sound studies often asks how listening creates intimacy.`,
+        `I wanted to ask the opposite question.`,
+        `This essay develops the idea of sonic anti-intimacy: moments when sound produces distance rather than connection.`,
+        `From headphones and algorithmic playlists to Muzak, virtual assistants and engineered silence, the research examines how listening technologies can isolate, dominate or detach us from the environments and people around us.`,
+        `Sometimes sound brings us closer.`,
+        `Sometimes it builds the wall.`
+      ]
+    },
+    {
+      id: 'research-3', category: 'RESEARCH', number: '03',
+      title: 'Is Pettman Right? Sonic Intimacy, ASMR, and the Hypersexualised Ear',
+      meta: 'Sound Studies · Media Theory', media: null,
+      copy: [
+        `Few technologies feel as private as headphones.`,
+        `A voice can whisper centimetres from your ear while the speaker sits thousands of kilometres away.`,
+        `Through ASMR, binaural recording and digitally mediated listening, this essay examines how technology manufactures sensations of closeness between strangers.`,
+        `It asks whether the ear, often described as indiscriminate and permanently open, has become increasingly curated.`,
+        `Digital intimacy may feel spontaneous.`,
+        `Its architecture is anything but.`
+      ]
+    },
+    {
+      id: 'research-4', category: 'RESEARCH', number: '04',
+      title: 'Echoes: The Fragility of the Human Psyche',
+      meta: 'Musicology · Psychoanalysis · Visual Culture', media: null,
+      copy: [
+        `Pink Floyd's Echoes lasts more than twenty-three minutes.`,
+        `Inside it is an entire psychological landscape.`,
+        `Using Lacanian psychoanalysis alongside surrealist works by Kay Sage, Yves Tanguy and Salvador Dalí, this essay reads the track as an exploration of fragmentation, recognition and the unstable construction of the self.`,
+        `Sound and image become parallel languages for the same question:`,
+        `how secure is the person we believe ourselves to be?`
+      ]
+    }
   ];
   let currentProject = 0;
   let returnFocus = null;
@@ -934,16 +1048,29 @@
 
   function showProject(index, resetScroll = true) {
     currentProject = Math.min(Math.max(index, 0), projects.length - 1);
-    const [, category, number] = projects[currentProject];
-    identity.textContent = `${category} ${number}`;
+    const project = projects[currentProject];
+    identity.textContent = `${project.category} ${project.number}`;
+    editorialCategory.textContent = `${project.category} / ${project.number}`;
+    editorialTitle.textContent = project.title;
+    editorialMeta.textContent = project.meta;
+    editorial.classList.toggle('is-text-only', !project.media);
+    editorialFigure.hidden = !project.media;
+    editorialFigure.classList.toggle('is-portrait', project.media === 'portrait');
+    editorialFigure.classList.toggle('is-landscape', project.media === 'landscape');
+    editorialFigure.querySelector('figcaption').textContent = `${project.title} — IMAGE TO COME`;
+    editorialCopy.replaceChildren(...project.copy.map((paragraph) => {
+      const element = document.createElement('p');
+      element.textContent = paragraph;
+      return element;
+    }));
     previousButton.disabled = currentProject === 0;
     nextButton.disabled = currentProject === projects.length - 1;
     previousButton.setAttribute('aria-label', currentProject === 0
       ? 'No previous project'
-      : `View ${projects[currentProject - 1][1]} ${projects[currentProject - 1][2]}`);
+      : `View ${projects[currentProject - 1].title}`);
     nextButton.setAttribute('aria-label', currentProject === projects.length - 1
       ? 'No next project'
-      : `View ${projects[currentProject + 1][1]} ${projects[currentProject + 1][2]}`);
+      : `View ${projects[currentProject + 1].title}`);
     if (resetScroll) panel.scrollTop = 0;
     window.requestAnimationFrame(updateScrollbar);
   }
@@ -967,7 +1094,7 @@
 
   projectLinks.forEach((link) => {
     const projectId = link.getAttribute('href')?.replace(/^#/, '');
-    const index = projects.findIndex(([id]) => id === projectId);
+    const index = projects.findIndex((project) => project.id === projectId);
     if (index < 0) return;
     link.addEventListener('click', (event) => {
       event.preventDefault();
