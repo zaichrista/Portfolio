@@ -39,8 +39,9 @@
   const archiveWordHoldDistance = 1;
   const archiveZoomDistance = 3.25;
   const archiveLetterZoomDuration = 0.58;
-  const archiveFrameFillProgress = 0.94;
-  const archiveBlackProgress = 0.30 + archiveLetterZoomDuration * archiveFrameFillProgress;
+  const archiveScaleCompleteProgress = 0.88;
+  const archiveLetterFillProgress = 0.94;
+  const archiveBlackProgress = 1;
   const disciplineHoldDistance = 2;
   const disciplineMoveDistance = 2;
   const archiveDisplayHoldDistance = 1.25;
@@ -294,7 +295,11 @@
         delay: archiveLetters.length > 1
           ? (archiveOrder.get(index) / (archiveLetters.length - 1)) * 0.30
           : 0,
-        scale: 42 + noise(index + 701) * 24
+        scale: Math.max(
+          120 + noise(index + 701) * 30,
+          window.innerWidth / Math.max(letterBox.width, 1) * 1.3,
+          window.innerHeight / Math.max(letterBox.height, 1) * 1.3
+        )
       };
     });
   }
@@ -699,10 +704,12 @@
       const letterProgress = clamp(
         (archiveZoomProgress - motion.delay) / archiveLetterZoomDuration
       );
-      if (letterProgress < archiveFrameFillProgress) archiveCoversFrame = false;
+      if (letterProgress < 1 || archiveZoomProgress < archiveBlackProgress) {
+        archiveCoversFrame = false;
+      }
       const travelProgress = smoothstep(letterProgress);
       const letterZoomProgress = clamp(
-        (archiveZoomProgress - motion.delay) / (archiveBlackProgress - motion.delay)
+        (archiveZoomProgress - motion.delay) / (archiveScaleCompleteProgress - motion.delay)
       );
       const letterScale = 1 + (motion.scale - 1) * Math.pow(letterZoomProgress, 1.15);
       const width = motion.width * letterScale;
@@ -715,6 +722,11 @@
       letter.style.fontSize = `${(motion.fontSize * letterScale).toFixed(2)}px`;
       letter.style.transform = 'scaleY(1.14)';
       letter.style.zIndex = `${Math.round(travelProgress * 100) + index}`;
+      // At this point every letter has finished zooming. Its enlarged box
+      // covers the frame before the page background makes the black handoff.
+      letter.style.backgroundColor = archiveZoomProgress >= archiveLetterFillProgress
+        ? '#101218'
+        : 'transparent';
     });
 
     const closingHasCoveredFrame = archiveCoversFrame && archiveExitProgress >= 0.999;
