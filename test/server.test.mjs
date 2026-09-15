@@ -59,9 +59,13 @@ describe('portfolio server', () => {
     assert.match(home, /data-legal-document="privacy"/);
     assert.match(home, /class="footer-legal-reader"/);
     assert.match(home, /src="\.\/legal\.js\?v=\d+"/);
-    assert.equal((home.match(/class="project-card(?: [^"]+)?" id="brand-strategy-\d+"/g) || []).length, 2);
-    assert.equal((home.match(/class="project-card(?: [^"]+)?" id="design-\d+"/g) || []).length, 5);
+    assert.equal((home.match(/class="project-card(?: [^"]+)?" id="brand-strategy-\d+"/g) || []).length, 3);
+    assert.equal((home.match(/class="project-card(?: [^"]+)?" id="design-\d+"/g) || []).length, 4);
     assert.equal((home.match(/class="project-card(?: [^"]+)?" id="research-\d+"/g) || []).length, 4);
+    const strategyColumn = home.match(/aria-label="Brand Strategy projects">([\s\S]*?)<\/section>/)?.[1] || '';
+    const designColumn = home.match(/aria-label="Design projects">([\s\S]*?)<\/section>/)?.[1] || '';
+    assert.match(strategyColumn, /id="brand-strategy-3"[\s\S]*?class="project-number">03[\s\S]*?<h2>Muni<\/h2>/);
+    assert.doesNotMatch(designColumn, /<h2>Muni<\/h2>/);
     assert.match(home, /class="archive-edition"/);
     assert.match(home, /class="archive-edition" aria-hidden="true">THE ARCHIVE · VOL\. 01 · 2026<\/p>/);
     assert.match(home, /class="archive-bottom-rule" aria-hidden="true"><\/div>/);
@@ -76,6 +80,10 @@ describe('portfolio server', () => {
     assert.match(home, /class="project-editorial-head"/);
     assert.match(home, /id="project-modal-title"/);
     assert.doesNotMatch(home, /AËSOP|Aesop built a global brand/);
+
+    const homeScriptResponse = await fetch(`${baseUrl}/home.js`);
+    assert.equal(homeScriptResponse.status, 200);
+    assert.match(await homeScriptResponse.text(), /id: 'brand-strategy-3', category: 'BRAND STRATEGY', number: '03',[\s\S]*?title: 'Muni'/);
 
     assert.match(homeResponse.headers.get('content-security-policy'), /substack-post-media\.s3\.amazonaws\.com/);
 

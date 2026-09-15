@@ -166,6 +166,7 @@ a:focus-visible {
 /* Home */
 
 .page-home {
+  --archive-menu-height: clamp(4.5rem, 9vh, 6.5rem);
   --split-offset: 0px;
   --split-offset-left: 0px;
   --seam-bottom: 43vw;
@@ -186,7 +187,7 @@ a:focus-visible {
   top: 0;
   left: 0;
   width: 100%;
-  min-height: clamp(4.5rem, 9vh, 6.5rem);
+  min-height: var(--archive-menu-height);
   padding: clamp(1.35rem, 3vh, 2.25rem) clamp(1.25rem, 2.5vw, 2.5rem);
   color: #fff;
   mix-blend-mode: difference;
@@ -419,7 +420,7 @@ a:focus-visible {
   position: absolute;
   left: clamp(1.25rem, 2.8vw, 2.75rem);
   right: clamp(1.25rem, 2.8vw, 2.75rem);
-  top: clamp(4.9rem, 9.5vh, 7rem);
+  top: var(--archive-menu-height);
   margin: 0;
   padding-block: clamp(0.55rem, 1vh, 0.8rem);
   border-top: 1px solid rgba(255, 255, 255, 0.58);
@@ -457,17 +458,13 @@ a:focus-visible {
   max-width: none;
   margin: 0;
   padding-inline: clamp(1.25rem, 2.8vw, 2.75rem);
-  font-size: clamp(2.65rem, 4.55vw, 6rem);
+  font-size: clamp(1.5rem, 3vw, 4.8rem);
   font-weight: 400;
   letter-spacing: -0.045em;
   line-height: 0.84;
   text-align: left;
   white-space: nowrap;
   will-change: transform;
-}
-
-.page-home .discipline-label-brand {
-  font-size: clamp(2rem, 3vw, 4.8rem);
 }
 
 .page-home .discipline-label-content {
@@ -513,24 +510,28 @@ a:focus-visible {
 }
 
 .page-home .portfolio-column:nth-child(1) .project-list {
-  grid-template-rows: repeat(2, minmax(15rem, 1fr));
+  grid-template-rows: repeat(3, minmax(13rem, 1fr));
 }
 
 .page-home .portfolio-column:nth-child(2) .project-list {
-  grid-template-rows: repeat(5, minmax(9rem, 1fr));
+  grid-template-rows: repeat(4, minmax(11.5rem, 1fr));
 }
 
 .page-home .portfolio-column:nth-child(2) .project-card {
   gap: clamp(0.8rem, 1.4vw, 1.5rem);
-  grid-template-columns: minmax(0, 1fr) minmax(0, 26%);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 38%);
 }
 
-.page-home .portfolio-column:nth-child(2) .project-card .project-copy {
-  grid-column: 1;
+.page-home .portfolio-column:nth-child(2) .project-card.media-left {
+  grid-template-columns: minmax(0, 38%) minmax(0, 1fr);
 }
 
-.page-home .portfolio-column:nth-child(2) .project-card .project-placeholder {
-  grid-column: 2;
+.page-home .portfolio-column:nth-child(1) .project-card.media-right {
+  grid-template-columns: minmax(0, 40%) minmax(0, 60%);
+}
+
+.page-home .portfolio-column:nth-child(1) .project-card.media-left {
+  grid-template-columns: minmax(0, 60%) minmax(0, 40%);
 }
 
 .page-home .portfolio-column:nth-child(2) .project-copy h2 {
@@ -653,15 +654,23 @@ a:focus-visible {
 
 .page-home .portfolio-column:nth-child(1) .project-placeholder {
   height: auto;
-  max-height: 24vh;
+  max-height: none;
   aspect-ratio: 1.5 / 1;
+}
+
+.page-home .portfolio-column:nth-child(1) .project-placeholder.portrait {
+  width: auto;
+  height: min(19vh, 100%);
+  max-height: 19vh;
+  aspect-ratio: 0.76 / 1;
+  justify-self: center;
 }
 
 .page-home .portfolio-column:nth-child(2) .project-placeholder {
   width: auto;
-  height: min(11vh, 100%);
+  height: min(16vh, 100%);
   max-width: 100%;
-  max-height: 11vh;
+  max-height: 16vh;
   aspect-ratio: 0.76 / 1;
 }
 
@@ -2112,11 +2121,7 @@ a:focus-visible {
 
   .page-home .discipline-label {
     padding-inline: 0.55rem;
-    font-size: clamp(1rem, 4.7vw, 2.65rem);
-  }
-
-  .page-home .discipline-label-brand {
-    font-size: clamp(0.85rem, 3vw, 1.8rem);
+    font-size: clamp(0.78rem, 3vw, 1.8rem);
   }
 
   .page-home .portfolio-board {
@@ -2146,6 +2151,12 @@ a:focus-visible {
     grid-template-columns: minmax(0, 1fr) minmax(5rem, 30%);
   }
 
+  .page-home .portfolio-column:nth-child(1) .project-card.media-right,
+  .page-home .portfolio-column:nth-child(1) .project-card.media-left,
+  .page-home .portfolio-column:nth-child(2) .project-card.media-left {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 42%);
+  }
+
   .page-home .project-copy h2,
   .page-home .project-card-text .project-copy h2 {
     font-size: clamp(1.15rem, 4.7vw, 1.7rem);
@@ -2166,15 +2177,22 @@ a:focus-visible {
   .page-home .portfolio-column:nth-child(1) .project-placeholder,
   .page-home .portfolio-column:nth-child(2) .project-placeholder {
     height: auto;
-    max-height: 7rem;
+    max-height: 10rem;
   }
 
   .page-home .portfolio-column:nth-child(1) .project-placeholder {
     width: 100%;
   }
 
+  .page-home .portfolio-column:nth-child(1) .project-placeholder.portrait {
+    width: min(100%, 7.5rem);
+    height: auto;
+    max-height: 10rem;
+  }
+
   .page-home .portfolio-column:nth-child(2) .project-placeholder {
-    width: min(100%, 5rem);
+    width: min(100%, 7rem);
+    max-height: 9.5rem;
     aspect-ratio: 0.76 / 1;
   }
 }
@@ -2283,8 +2301,12 @@ a:focus-visible {
 }
 
 @media (max-width: 600px) {
+  .page-home {
+    --archive-menu-height: 4.25rem;
+  }
+
   .page-home .home-header {
-    min-height: 4.25rem;
+    min-height: var(--archive-menu-height);
     padding-inline: 0.85rem;
   }
 

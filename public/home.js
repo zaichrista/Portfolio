@@ -920,7 +920,7 @@
       ]
     },
     {
-      id: 'design-1', category: 'DESIGN', number: '01',
+      id: 'brand-strategy-3', category: 'BRAND STRATEGY', number: '03',
       title: 'Muni', meta: 'Fashion System · Product Design · Brand Concept', media: 'portrait',
       copy: [
         `Muni begins with a zipper.`,
@@ -930,7 +930,7 @@
       ]
     },
     {
-      id: 'design-2', category: 'DESIGN', number: '02',
+      id: 'design-2', category: 'DESIGN', number: '01',
       title: 'Kisses from Parikyo', meta: 'Fashion Direction · World-Building · Concept Collection', media: 'portrait',
       copy: [
         `Paris and Tokyo are separated by almost ten thousand kilometres. Parikyo exists somewhere in between.`,
@@ -939,7 +939,7 @@
       ]
     },
     {
-      id: 'design-3', category: 'DESIGN', number: '03',
+      id: 'design-3', category: 'DESIGN', number: '02',
       title: 'FW23: Women, Studied', meta: 'Runway Collection · Fashion Direction', media: 'portrait',
       copy: [
         `To look at a woman is never neutral.`,
@@ -949,7 +949,7 @@
       ]
     },
     {
-      id: 'design-4', category: 'DESIGN', number: '04',
+      id: 'design-4', category: 'DESIGN', number: '03',
       title: 'SS24: Reflections on Glamour', meta: 'Runway Collection · Creative Direction', media: 'portrait',
       copy: [
         `Glamour has always promised transformation.`,
@@ -960,7 +960,7 @@
       ]
     },
     {
-      id: 'design-5', category: 'DESIGN', number: '05',
+      id: 'design-5', category: 'DESIGN', number: '04',
       title: 'A Voyage in Ascent', meta: 'Oxford Fashion Gala · Creative & Marketing Direction', media: 'portrait',
       copy: [
         `A runway lasts minutes. Its world begins long before the first model walks.`,
