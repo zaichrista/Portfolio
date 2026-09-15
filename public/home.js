@@ -21,6 +21,7 @@
   const archiveHeadingRule = page.querySelector('.archive-heading-rule');
   const disciplineLabels = Array.from(page.querySelectorAll('.discipline-label'));
   const portfolioBoard = page.querySelector('.portfolio-board');
+  const projectCards = Array.from(page.querySelectorAll('.portfolio-board .project-card'));
   const closingSection = page.querySelector('.closing-section');
   const closingPlaceholder = page.querySelector('.closing-placeholder');
   const closingFooter = page.querySelector('.closing-footer');
@@ -46,7 +47,9 @@
   const archiveBlackProgress = 1;
   const disciplineHoldDistance = 2;
   const disciplineMoveDistance = 2;
-  const archiveDisplayHoldDistance = 1.25;
+  const archiveDisplayHoldDistance = 0.4;
+  const projectScrollDistance = 2.35;
+  const projectSequenceDistance = projectCards.length * projectScrollDistance;
   const archiveExitDistance = 1.35;
   const closingPlaceholderHoldDistance = 0.75;
   const footerRiseDistance = 1.35;
@@ -311,6 +314,7 @@
       questionMorphDistance + questionHoldDistance + sectionScrollDistance
       + archiveWordHoldDistance + archiveZoomDistance
       + disciplineHoldDistance + disciplineMoveDistance + archiveDisplayHoldDistance
+      + projectSequenceDistance
       + archiveExitDistance + closingPlaceholderHoldDistance
       + footerRiseDistance
     );
@@ -333,13 +337,13 @@
     const disciplineMoveEndY = blackStartY
       + viewport * (disciplineHoldDistance + disciplineMoveDistance);
     const archiveExitEndY = disciplineMoveEndY
-      + viewport * (archiveDisplayHoldDistance + archiveExitDistance);
+      + viewport * (archiveDisplayHoldDistance + projectSequenceDistance + archiveExitDistance);
 
     return {
       home: 0,
       about: viewport * splitScrollDistance,
       archiveIntro: archiveCentreY,
-      archive: disciplineMoveEndY,
+      archive: disciplineMoveEndY + viewport * (archiveDisplayHoldDistance + projectScrollDistance * 0.3),
       substack: archiveExitEndY
     };
   }
@@ -661,8 +665,10 @@
       (window.scrollY - disciplineMoveStartY)
       / (window.innerHeight * disciplineMoveDistance)
     ));
-    const archiveExitStartY = disciplineMoveEndY
+    const projectSequenceStartY = disciplineMoveEndY
       + window.innerHeight * archiveDisplayHoldDistance;
+    const archiveExitStartY = projectSequenceStartY
+      + window.innerHeight * projectSequenceDistance;
     const archiveExitProgress = morphAnchorY === null ? 0 : smoothstep(clamp(
       (window.scrollY - archiveExitStartY) / (window.innerHeight * archiveExitDistance)
     ));
@@ -731,17 +737,22 @@
         : 'transparent';
     });
 
-    const closingHasCoveredFrame = archiveCoversFrame && archiveExitProgress >= 0.999;
-    const backgroundChannel = archiveCoversFrame
-      ? (closingHasCoveredFrame ? 255 : 16)
-      : 224;
-    const backgroundGreen = archiveCoversFrame
-      ? (closingHasCoveredFrame ? 241 : 18)
-      : 225;
-    const backgroundBlue = archiveCoversFrame
-      ? (closingHasCoveredFrame ? 242 : 24)
-      : 221;
-    const backgroundColour = `rgb(${backgroundChannel}, ${backgroundGreen}, ${backgroundBlue})`;
+    const projectPosition = clamp(
+      (window.scrollY - projectSequenceStartY) / (window.innerHeight * projectScrollDistance),
+      0, projectCards.length
+    );
+    const designBlend = smoothstep(clamp((projectPosition - 2.5) / 0.5));
+    const researchBlend = smoothstep(clamp((projectPosition - 6.5) / 0.5));
+    const archiveColours = [[16, 18, 24], [10, 20, 31], [21, 22, 19]];
+    const blendColour = (from, to, amount) => from.map((channel, index) =>
+      Math.round(channel + (to[index] - channel) * amount));
+    const archiveColour = blendColour(
+      blendColour(archiveColours[0], archiveColours[1], designBlend),
+      archiveColours[2], researchBlend
+    );
+    const backgroundColour = archiveCoversFrame
+      ? `rgb(${archiveColour.join(', ')})`
+      : 'rgb(224, 225, 221)';
     page.style.backgroundColor = backgroundColour;
     if (hero) hero.style.backgroundColor = backgroundColour;
     if (archiveWord) archiveWord.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
@@ -774,6 +785,11 @@
     const disciplineLineGap = Math.max(finalFontSize * 0.72, 38);
     const labelScale = 0.42 + disciplineMoveProgress * 0.58;
 
+    const disciplineWeights = [
+      1 - designBlend,
+      designBlend * (1 - researchBlend),
+      researchBlend
+    ];
     disciplineLabels.forEach((label, index) => {
       const content = labelContents[index];
       const labelStyle = getComputedStyle(label);
@@ -792,6 +808,8 @@
       const x = (stackedX - currentX) * inverseProgress;
       const y = (stackedY - currentY) * inverseProgress;
       label.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+      const focusProgress = smoothstep(clamp((disciplineMoveProgress - 0.72) / 0.28));
+      label.style.opacity = (1 - focusProgress * (1 - disciplineWeights[index]) * 0.72).toFixed(3);
     });
 
     if (portfolioBoard) {
@@ -803,6 +821,18 @@
       portfolioBoard.style.transform = `translate3d(0, ${((1 - boardProgress) * 11).toFixed(3)}vh, 0)`;
       portfolioBoard.inert = !boardReady;
       portfolioBoard.setAttribute('aria-hidden', boardVisible ? 'false' : 'true');
+      projectCards.forEach((card, index) => {
+        const phase = projectPosition - index;
+        const entering = smoothstep(clamp(phase / 0.24));
+        const leaving = smoothstep(clamp((phase - 0.76) / 0.24));
+        const opacity = boardProgress * entering * (1 - leaving) * (1 - archiveExitProgress);
+        const rise = (1 - entering) * 12 - leaving * 12;
+        card.style.opacity = opacity.toFixed(3);
+        card.style.transform = `translate3d(0, ${rise.toFixed(3)}vh, 0)`;
+        card.style.visibility = opacity > 0.001 ? 'visible' : 'hidden';
+        card.inert = !boardReady || opacity < 0.98;
+        card.setAttribute('aria-hidden', opacity > 0.001 ? 'false' : 'true');
+      });
     }
 
     if (inlineQuestion) {

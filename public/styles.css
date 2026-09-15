@@ -2197,6 +2197,150 @@ a:focus-visible {
   }
 }
 
+/* The archive uses page scroll to present one project at a time. */
+.page-home .portfolio-board {
+  display: block;
+  overflow: hidden;
+  pointer-events: auto;
+}
+
+.page-home .portfolio-board .portfolio-column,
+.page-home .portfolio-board .project-list {
+  position: static;
+  display: block;
+  min-height: 0;
+  height: 0;
+}
+
+.page-home .portfolio-board .portfolio-column + .portfolio-column {
+  border: 0;
+}
+
+.page-home .portfolio-board .project-card,
+.page-home .portfolio-board .portfolio-column:nth-child(1) .project-card.media-right,
+.page-home .portfolio-board .portfolio-column:nth-child(1) .project-card.media-left,
+.page-home .portfolio-board .portfolio-column:nth-child(2) .project-card,
+.page-home .portfolio-board .portfolio-column:nth-child(2) .project-card.media-left {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+  gap: clamp(2rem, 5vw, 7rem);
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 5rem) clamp(1.25rem, 7vw, 9rem);
+  border: 0;
+  visibility: hidden;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.page-home .portfolio-board .project-card.media-left .project-copy {
+  grid-column: 2;
+}
+
+.page-home .portfolio-board .project-card.media-left .project-placeholder {
+  grid-column: 1;
+}
+
+.page-home .portfolio-board .project-card .project-copy h2,
+.page-home .portfolio-board .portfolio-column:nth-child(1) .project-card:first-child h2,
+.page-home .portfolio-board .project-card-text .project-copy h2 {
+  max-width: 18ch;
+  font-size: clamp(3rem, 5.6vw, 7rem);
+  line-height: 0.94;
+}
+
+.page-home .portfolio-board .project-card .project-copy > p:not(.project-number) {
+  margin-top: clamp(0.8rem, 2vh, 1.5rem);
+  font-size: clamp(0.85rem, 1.05vw, 1.2rem);
+}
+
+.page-home .portfolio-board .project-card .project-copy a {
+  margin-top: clamp(1.5rem, 4vh, 3rem);
+  font-size: clamp(0.72rem, 0.8vw, 0.95rem);
+}
+
+.page-home .portfolio-board .project-card .project-placeholder,
+.page-home .portfolio-board .portfolio-column:nth-child(1) .project-placeholder,
+.page-home .portfolio-board .portfolio-column:nth-child(2) .project-placeholder {
+  width: 100%;
+  height: min(54vh, 38rem);
+  max-width: none;
+  max-height: none;
+  aspect-ratio: auto;
+  font-size: clamp(0.7rem, 0.9vw, 1rem);
+}
+
+.page-home .portfolio-board .project-card .project-placeholder.portrait,
+.page-home .portfolio-board .portfolio-column:nth-child(1) .project-placeholder.portrait {
+  width: min(100%, 26rem);
+  height: min(56vh, 38rem);
+  max-height: none;
+  justify-self: center;
+}
+
+.page-home .portfolio-board .project-card-text {
+  grid-template-columns: 1fr;
+}
+
+.page-home .portfolio-board .project-card-text .project-copy {
+  max-width: min(78rem, 100%);
+}
+
+.page-home .portfolio-board .project-card-text .project-copy h2 {
+  max-width: 22ch;
+  font-size: clamp(2.75rem, 4.6vw, 5.8rem);
+}
+
+@media (max-width: 760px) {
+  .page-home .portfolio-board .project-card,
+  .page-home .portfolio-board .portfolio-column:nth-child(1) .project-card.media-right,
+  .page-home .portfolio-board .portfolio-column:nth-child(1) .project-card.media-left,
+  .page-home .portfolio-board .portfolio-column:nth-child(2) .project-card,
+  .page-home .portfolio-board .portfolio-column:nth-child(2) .project-card.media-left {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto minmax(0, 1fr);
+    gap: 1.5rem;
+    align-content: center;
+    padding: 1.5rem clamp(1rem, 5vw, 2rem);
+  }
+
+  .page-home .portfolio-board .project-card .project-copy,
+  .page-home .portfolio-board .project-card.media-left .project-copy {
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .page-home .portfolio-board .project-card .project-placeholder,
+  .page-home .portfolio-board .project-card.media-left .project-placeholder {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .page-home .portfolio-board .project-card .project-copy h2,
+  .page-home .portfolio-board .portfolio-column:nth-child(1) .project-card:first-child h2,
+  .page-home .portfolio-board .project-card-text .project-copy h2 {
+    font-size: clamp(2.1rem, 8vw, 4.5rem);
+  }
+
+  .page-home .portfolio-board .project-card .project-placeholder,
+  .page-home .portfolio-board .portfolio-column:nth-child(1) .project-placeholder,
+  .page-home .portfolio-board .portfolio-column:nth-child(2) .project-placeholder,
+  .page-home .portfolio-board .project-card .project-placeholder.portrait {
+    width: 100%;
+    height: min(32vh, 18rem);
+    max-height: none;
+  }
+
+  .page-home .portfolio-board .project-card-text {
+    grid-template-rows: 1fr;
+  }
+
+  .page-home .portfolio-board .project-card-text .project-copy h2 {
+    font-size: clamp(2rem, 7vw, 3.5rem);
+  }
+}
+
 .page-home .split-panel {
   position: absolute;
   z-index: 1;
