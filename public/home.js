@@ -766,7 +766,7 @@
 
     const disciplineTop = Math.min(Math.max(window.innerHeight * 0.125, 120), 136);
     const labelContents = disciplineLabels.map((label) => label.firstElementChild || label);
-    const finalFontSize = parseFloat(getComputedStyle(disciplineLabels[0]).fontSize || 48);
+    const finalFontSize = Math.max(...disciplineLabels.map((label) => parseFloat(getComputedStyle(label).fontSize || 48)));
     const disciplineLineGap = Math.max(finalFontSize * 0.72, 38);
     const labelScale = 0.42 + disciplineMoveProgress * 0.58;
 
@@ -774,22 +774,8 @@
       const content = labelContents[index];
       const labelStyle = getComputedStyle(label);
       const targetLeft = window.innerWidth * index / 3 + parseFloat(labelStyle.paddingLeft || 0);
-      let visualWidth = content.offsetWidth;
-      let visualHeight = content.offsetHeight;
-
-      if (index === 0) {
-        const firstWord = content.querySelector('.discipline-brand-first');
-        const secondWord = content.querySelector('.discipline-brand-second');
-        if (firstWord && secondWord) {
-          const lineHeight = parseFloat(labelStyle.lineHeight || finalFontSize * 0.84);
-          const inlineGap = finalFontSize * 0.2;
-          const secondX = (firstWord.offsetWidth + inlineGap) * (1 - disciplineMoveProgress);
-          const secondY = -lineHeight * (1 - disciplineMoveProgress);
-          secondWord.style.transform = `translate3d(${secondX.toFixed(2)}px, ${secondY.toFixed(2)}px, 0)`;
-          visualWidth = Math.max(firstWord.offsetWidth, secondX + secondWord.offsetWidth);
-          visualHeight = lineHeight * (1 + disciplineMoveProgress);
-        }
-      }
+      const visualWidth = content.offsetWidth;
+      const visualHeight = content.offsetHeight;
 
       content.style.transform = `scale(${labelScale.toFixed(4)})`;
       const stackedX = window.innerWidth / 2;

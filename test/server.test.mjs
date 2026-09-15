@@ -63,8 +63,11 @@ describe('portfolio server', () => {
     assert.equal((home.match(/class="project-card(?: [^"]+)?" id="design-\d+"/g) || []).length, 5);
     assert.equal((home.match(/class="project-card(?: [^"]+)?" id="research-\d+"/g) || []).length, 4);
     assert.match(home, /class="archive-edition"/);
-    assert.match(home, /11 STORIES/);
-    assert.match(home, /class="archive-folio"/);
+    assert.match(home, /class="archive-edition" aria-hidden="true">THE ARCHIVE · VOL\. 01 · 2026<\/p>/);
+    assert.match(home, /class="discipline-label discipline-label-brand"><span class="discipline-label-content">BRAND STRATEGY<\/span>/);
+    assert.match(home, /class="discipline-label discipline-label-design"/);
+    assert.match(home, /class="discipline-label discipline-label-research"/);
+    assert.doesNotMatch(home, /archive-folio|discipline-brand-second|11 STORIES/);
     const researchColumn = home.match(/aria-label="Research projects">([\s\S]*?)<\/section>/)?.[1] || '';
     assert.doesNotMatch(researchColumn, /project-placeholder/);
     assert.match(home, /class="project-editorial-masthead"/);
