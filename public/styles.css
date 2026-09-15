@@ -638,8 +638,8 @@ a:focus-visible {
   position: absolute;
   top: 54.5%;
   left: 50%;
-  width: 94vw;
-  height: 86vh;
+  width: min(94vw, 110rem);
+  height: min(86vh, 62rem);
   margin: 0;
   transform: translate(-50%, -50%);
 }
@@ -660,7 +660,7 @@ a:focus-visible {
   padding-right: 0.28em;
   background: #fff1f2;
   font-family: "Times New Roman", Times, serif;
-  font-size: clamp(2rem, min(3.6vw, 7vh), 7rem);
+  font-size: clamp(2rem, 3.6vw, 4.5rem);
   letter-spacing: -0.055em;
   line-height: 0.82;
   transform: translateY(-108%) scaleY(1.18);
@@ -700,7 +700,7 @@ a:focus-visible {
 
 .page-home .substack-editorial-header {
   position: relative;
-  padding-block: clamp(0.7rem, 1.25vh, 1.75rem) clamp(0.75rem, 1.45vh, 2rem);
+  padding-block: clamp(0.7rem, 1.25vh, 1.1rem) clamp(0.75rem, 1.45vh, 1.25rem);
 }
 
 .page-home .substack-editorial-header::after { bottom: 0; }
@@ -711,7 +711,7 @@ a:focus-visible {
 .page-home .substack-read,
 .page-home .substack-subscribe {
   font-family: Arial, Helvetica, sans-serif;
-  font-size: clamp(0.55rem, min(0.66vw, 1.2vh), 1.1rem);
+  font-size: clamp(0.55rem, 0.66vw, 0.78rem);
   letter-spacing: 0.17em;
   line-height: 1.15;
 }
@@ -731,7 +731,7 @@ a:focus-visible {
 
 .page-home .substack-masthead-row h2 {
   margin: 0;
-  font-size: clamp(3.5rem, min(6.75vw, 12vh), 11rem);
+  font-size: clamp(3.5rem, 6.75vw, 8rem);
   font-weight: 400;
   letter-spacing: -0.075em;
   line-height: 0.68;
@@ -745,7 +745,7 @@ a:focus-visible {
   flex: 0 0 auto;
   gap: 1.55rem;
   align-items: center;
-  padding: clamp(0.85rem, min(1.15vw, 2vh), 1.8rem) clamp(1.2rem, min(1.7vw, 3vh), 2.7rem);
+  padding: clamp(0.85rem, 1.15vw, 1.2rem) clamp(1.2rem, 1.7vw, 1.85rem);
   background: #ec4899;
   color: #fff !important;
 }
@@ -765,7 +765,7 @@ a:focus-visible {
   display: grid;
   min-width: 0;
   min-height: 0;
-  padding: clamp(1rem, min(1.45vw, 2.5vh), 2.4rem) clamp(1rem, min(1.7vw, 3vh), 2.8rem) clamp(1rem, min(1.45vw, 2.5vh), 2.4rem) 0;
+  padding: clamp(1rem, 1.45vw, 1.65rem) clamp(1rem, 1.7vw, 1.9rem) clamp(1rem, 1.45vw, 1.65rem) 0;
   grid-template-columns: 47% 53%;
   border-right: 1px solid #101218;
 }
@@ -790,7 +790,7 @@ a:focus-visible {
 .page-home .substack-feature-copy {
   display: flex;
   min-width: 0;
-  padding-left: clamp(1rem, min(1.55vw, 2.7vh), 2.6rem);
+  padding-left: clamp(1rem, 1.55vw, 1.7rem);
   flex-direction: column;
 }
 
@@ -808,7 +808,7 @@ a:focus-visible {
 
 .page-home .substack-feature h3 {
   margin: auto 0 0;
-  font-size: clamp(2.35rem, min(3.95vw, 7vh), 7rem);
+  font-size: clamp(2.35rem, 3.95vw, 4.75rem);
   font-weight: 400;
   letter-spacing: -0.055em;
   line-height: 0.82;
@@ -816,7 +816,7 @@ a:focus-visible {
 
 .page-home .substack-deck {
   margin: clamp(0.65rem, 1.2vh, 1rem) 0 0;
-  font-size: clamp(1rem, min(1.4vw, 2.4vh), 2.3rem);
+  font-size: clamp(1rem, 1.4vw, 1.65rem);
   font-style: italic;
 }
 
@@ -841,7 +841,7 @@ a:focus-visible {
   display: flex;
   min-width: 0;
   min-height: 0;
-  padding: clamp(0.8rem, min(1.2vw, 2vh), 1.9rem);
+  padding: clamp(0.8rem, 1.2vw, 1.3rem);
   flex-direction: column;
   border-bottom: 1px solid #101218;
 }
@@ -860,13 +860,13 @@ a:focus-visible {
 .page-home .substack-story-image > div {
   display: flex;
   min-width: 0;
-  padding: clamp(0.8rem, min(1.2vw, 2vh), 1.9rem);
+  padding: clamp(0.8rem, 1.2vw, 1.3rem);
   flex-direction: column;
 }
 
 .page-home .substack-story h3 {
   margin: auto 0 0;
-  font-size: clamp(1.35rem, min(2.15vw, 3.8vh), 3.8rem);
+  font-size: clamp(1.35rem, 2.15vw, 2.65rem);
   font-weight: 400;
   letter-spacing: -0.045em;
   line-height: 0.88;
@@ -876,7 +876,7 @@ a:focus-visible {
 .page-home .substack-story-image > div > p:last-child {
   max-width: 27rem;
   margin: clamp(0.38rem, 0.75vh, 0.65rem) 1.5rem 0 0;
-  font-size: clamp(0.72rem, min(0.9vw, 1.6vh), 1.45rem);
+  font-size: clamp(0.72rem, 0.9vw, 1rem);
   line-height: 1.2;
 }
 
@@ -884,7 +884,7 @@ a:focus-visible {
   position: absolute;
   right: clamp(0.6rem, 1vw, 1rem);
   bottom: clamp(0.55rem, 0.8vw, 0.85rem);
-  font-size: clamp(0.9rem, min(1.25vw, 2.2vh), 2rem);
+  font-size: clamp(0.9rem, 1.25vw, 1.35rem);
 }
 
 .page-home .substack-story-last,
@@ -894,7 +894,7 @@ a:focus-visible {
 
 .page-home .substack-editorial-footer {
   position: relative;
-  padding-block: clamp(0.7rem, 1.2vh, 1.7rem);
+  padding-block: clamp(0.7rem, 1.2vh, 1rem);
 }
 
 .page-home .substack-editorial-footer::before { top: 0; }
@@ -1946,6 +1946,7 @@ a:focus-visible {
 
 .page-home .hero-word {
   display: block;
+  letter-spacing: 0;
   opacity: var(--word-opacity);
   transform-origin: center;
   will-change: transform, opacity;
@@ -1959,6 +1960,15 @@ a:focus-visible {
 .page-home .hero-letter {
   position: relative;
   display: inline-block;
+  letter-spacing: 0;
+}
+
+.page-home .hero-letter + .hero-letter {
+  margin-left: -0.075em;
+}
+
+.page-home .hero-letter:last-child {
+  margin-right: -0.075em;
 }
 
 .page-home .hero-letter.is-calligraphic-flash {
@@ -1970,6 +1980,7 @@ a:focus-visible {
   z-index: 3;
   top: 50%;
   left: 50%;
+  width: 2.5em;
   color: hsl(var(--flash-hue) 92% 52%);
   content: attr(data-letter);
   font-family: "Snell Roundhand", "Zapfino", "Apple Chancery", cursive;
@@ -1980,6 +1991,7 @@ a:focus-visible {
   pointer-events: none;
   transform: translate(-50%, -50%) scale(1.08);
   transform-origin: center;
+  text-align: center;
   white-space: nowrap;
 }
 
