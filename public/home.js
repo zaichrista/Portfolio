@@ -17,6 +17,8 @@
   const archiveWord = page.querySelector('.archive-word');
   const archiveLetters = Array.from(page.querySelectorAll('.archive-letter'));
   const disciplineSection = page.querySelector('.discipline-section');
+  const archiveEdition = page.querySelector('.archive-edition');
+  const archiveHeadingRule = page.querySelector('.archive-heading-rule');
   const disciplineLabels = Array.from(page.querySelectorAll('.discipline-label'));
   const portfolioBoard = page.querySelector('.portfolio-board');
   const closingSection = page.querySelector('.closing-section');
@@ -764,7 +766,9 @@
       }
     }
 
-    const disciplineTop = Math.min(Math.max(window.innerHeight * 0.125, 120), 136);
+    const headingBandCenter = archiveEdition && archiveHeadingRule
+      ? (archiveEdition.offsetTop + archiveEdition.offsetHeight + archiveHeadingRule.offsetTop) / 2
+      : window.innerHeight * 0.16;
     const labelContents = disciplineLabels.map((label) => label.firstElementChild || label);
     const finalFontSize = Math.max(...disciplineLabels.map((label) => parseFloat(getComputedStyle(label).fontSize || 48)));
     const disciplineLineGap = Math.max(finalFontSize * 0.72, 38);
@@ -776,7 +780,9 @@
       const targetLeft = window.innerWidth * index / 3 + parseFloat(labelStyle.paddingLeft || 0);
       const visualWidth = content.offsetWidth;
       const visualHeight = content.offsetHeight;
+      const disciplineTop = headingBandCenter - visualHeight / 2;
 
+      label.style.top = `${disciplineTop.toFixed(2)}px`;
       content.style.transform = `scale(${labelScale.toFixed(4)})`;
       const stackedX = window.innerWidth / 2;
       const stackedY = window.innerHeight / 2 + (index - 1) * disciplineLineGap;

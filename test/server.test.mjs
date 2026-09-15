@@ -68,6 +68,7 @@ describe('portfolio server', () => {
     assert.match(home, /class="discipline-label discipline-label-brand"><span class="discipline-label-content">BRAND STRATEGY<\/span>/);
     assert.match(home, /class="discipline-label discipline-label-design"/);
     assert.match(home, /class="discipline-label discipline-label-research"/);
+    assert.match(home, /class="archive-heading-rule" aria-hidden="true"><\/div>/);
     assert.doesNotMatch(home, /archive-folio|discipline-brand-second|11 STORIES/);
     const researchColumn = home.match(/aria-label="Research projects">([\s\S]*?)<\/section>/)?.[1] || '';
     assert.doesNotMatch(researchColumn, /project-placeholder/);

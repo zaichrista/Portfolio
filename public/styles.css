@@ -404,6 +404,8 @@ a:focus-visible {
 }
 
 .page-home .discipline-section {
+  --archive-heading-rule-top: clamp(13rem, 21vh, 16rem);
+  --archive-bottom-inset: clamp(0.8rem, 1.8vh, 1.5rem);
   position: absolute;
   z-index: 3;
   inset: 0;
@@ -419,7 +421,8 @@ a:focus-visible {
   right: clamp(1.25rem, 2.8vw, 2.75rem);
   top: clamp(4.9rem, 9.5vh, 7rem);
   margin: 0;
-  padding-bottom: clamp(0.55rem, 1vh, 0.8rem);
+  padding-block: clamp(0.55rem, 1vh, 0.8rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.58);
   border-bottom: 1px solid rgba(255, 255, 255, 0.58);
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(0.56rem, 0.67vw, 0.78rem);
@@ -429,13 +432,21 @@ a:focus-visible {
   white-space: nowrap;
 }
 
+.page-home .archive-heading-rule,
 .page-home .archive-bottom-rule {
   position: absolute;
   right: clamp(1.25rem, 2.8vw, 2.75rem);
-  bottom: clamp(0.8rem, 1.8vh, 1.5rem);
   left: clamp(1.25rem, 2.8vw, 2.75rem);
   height: 1px;
   background: rgba(255, 255, 255, 0.58);
+}
+
+.page-home .archive-heading-rule {
+  top: var(--archive-heading-rule-top);
+}
+
+.page-home .archive-bottom-rule {
+  bottom: var(--archive-bottom-inset);
 }
 
 .page-home .discipline-label {
@@ -472,7 +483,7 @@ a:focus-visible {
 .page-home .portfolio-board {
   position: absolute;
   z-index: 1;
-  inset: 20vh 0 5vh;
+  inset: var(--archive-heading-rule-top) 0 var(--archive-bottom-inset);
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   overflow-y: auto;
@@ -2088,6 +2099,7 @@ a:focus-visible {
 
 @media (max-width: 760px) {
   .page-home .archive-edition,
+  .page-home .archive-heading-rule,
   .page-home .archive-bottom-rule {
     left: 0.75rem;
     right: 0.75rem;
@@ -2108,7 +2120,7 @@ a:focus-visible {
   }
 
   .page-home .portfolio-board {
-    inset: 20vh 0 5vh;
+    inset: var(--archive-heading-rule-top) 0 var(--archive-bottom-inset);
     overflow-y: auto;
     grid-template-columns: 1fr;
     overscroll-behavior: contain;
