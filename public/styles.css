@@ -1023,7 +1023,8 @@ a:focus-visible {
   font-family: "Times New Roman", Times, serif;
   font-size: 13.8vw;
   font-weight: 400;
-  letter-spacing: -0.075em;
+  gap: 0.13em;
+  letter-spacing: 0;
   line-height: 0.72;
   text-align: center;
   transform: scaleY(2.25);
@@ -1034,6 +1035,25 @@ a:focus-visible {
 .page-home .closing-name[hidden],
 .page-home .footer-legal-reader[hidden] {
   display: none;
+}
+
+.page-home .closing-word {
+  display: block;
+  white-space: nowrap;
+}
+
+.page-home .closing-letter {
+  position: relative;
+  display: inline-block;
+  letter-spacing: 0;
+}
+
+.page-home .closing-letter + .closing-letter {
+  margin-left: -0.075em;
+}
+
+.page-home .closing-letter:last-child {
+  margin-right: -0.075em;
 }
 
 .page-home .footer-legal-reader {
@@ -1971,11 +1991,13 @@ a:focus-visible {
   margin-right: -0.075em;
 }
 
-.page-home .hero-letter.is-calligraphic-flash {
+.page-home .hero-letter.is-calligraphic-flash,
+.page-home .closing-letter.is-calligraphic-flash {
   color: transparent;
 }
 
-.page-home .hero-letter.is-calligraphic-flash::after {
+.page-home .hero-letter.is-calligraphic-flash::after,
+.page-home .closing-letter.is-calligraphic-flash::after {
   position: absolute;
   z-index: 3;
   top: 50%;
