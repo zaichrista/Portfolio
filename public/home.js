@@ -7,6 +7,7 @@
   const rightWord = page.querySelector('.hero-word-right');
   const terminalA = page.querySelector('.hero-terminal-a');
   const initialC = page.querySelector('.hero-initial-c');
+  const heroLetters = Array.from(page.querySelectorAll('.hero-letter'));
   const revealCopy = page.querySelector('.reveal-copy');
   const breakawayCopy = page.querySelector('.breakaway-copy');
   const inlineQuestion = page.querySelector('.inline-question');
@@ -61,6 +62,8 @@
   let archiveLetterMotions = [];
   let navigationFrame = 0;
   let navigationTimer = 0;
+  let heroFlashTimer = 0;
+  let activeHeroFlash = null;
 
   function clamp(value, minimum = 0, maximum = 1) {
     return Math.min(Math.max(value, minimum), maximum);
@@ -73,6 +76,32 @@
   function noise(seed) {
     const value = Math.sin(seed * 12.9898) * 43758.5453;
     return value - Math.floor(value);
+  }
+
+  function scheduleHeroFlash() {
+    const delay = 2000 + Math.random() * 4500;
+    heroFlashTimer = window.setTimeout(showHeroFlash, delay);
+  }
+
+  function showHeroFlash() {
+    heroFlashTimer = 0;
+
+    if (document.hidden || heroLetters.length === 0) {
+      scheduleHeroFlash();
+      return;
+    }
+
+    const letter = heroLetters[Math.floor(Math.random() * heroLetters.length)];
+    letter.style.setProperty('--flash-hue', `${Math.floor(Math.random() * 360)}`);
+    letter.classList.add('is-calligraphic-flash');
+    activeHeroFlash = letter;
+
+    window.setTimeout(() => {
+      letter.classList.remove('is-calligraphic-flash');
+      letter.style.removeProperty('--flash-hue');
+      if (activeHeroFlash === letter) activeHeroFlash = null;
+      scheduleHeroFlash();
+    }, 500);
   }
 
   function appendQuestionWords(container, text) {
@@ -835,6 +864,7 @@
   }
 
   requestUpdate();
+  scheduleHeroFlash();
 
   const parameters = new URLSearchParams(window.location.search);
   const initialSection = parameters.get('section') || window.location.hash.replace(/^#/, '');
