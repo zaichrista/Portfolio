@@ -69,8 +69,6 @@ describe('portfolio server', () => {
     assert.match(home, /class="archive-edition"/);
     assert.match(home, /class="archive-edition" aria-hidden="true">THE ARCHIVE · VOL\. 01 · 2026<\/p>/);
     assert.match(home, /class="archive-bottom-rule" aria-hidden="true"><\/div>/);
-    assert.match(home, /class="archive-progress" aria-hidden="true">PROJECT 01 \/ 11<\/p>/);
-    assert.match(home, /class="hero-scroll-cue" aria-hidden="true">SCROLL TO EXPLORE/);
     assert.match(home, /class="discipline-label discipline-label-brand" href="#brand-strategy-1"/);
     assert.match(home, /class="discipline-label discipline-label-design" href="#design-2"/);
     assert.match(home, /class="discipline-label discipline-label-research" href="#research-1"/);
@@ -87,7 +85,7 @@ describe('portfolio server', () => {
     const homeScriptResponse = await fetch(`${baseUrl}/home.js`);
     assert.equal(homeScriptResponse.status, 200);
     const homeScript = await homeScriptResponse.text();
-    assert.match(homeScript, /projectScrollDistance = 1\.7/);
+    assert.match(homeScript, /projectScrollDistance = 1\.55/);
     assert.match(homeScript, /function navigateToProject\(index/);
     assert.doesNotMatch(homeScript, /project-modal|openProject\(/);
 

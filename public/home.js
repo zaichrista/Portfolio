@@ -8,7 +8,6 @@
   const terminalA = page.querySelector('.hero-terminal-a');
   const initialC = page.querySelector('.hero-initial-c');
   const heroLetters = Array.from(page.querySelectorAll('.hero-letter'));
-  const heroScrollCue = page.querySelector('.hero-scroll-cue');
   const closingLetters = Array.from(page.querySelectorAll('.closing-letter'));
   const revealCopy = page.querySelector('.reveal-copy');
   const breakawayCopy = page.querySelector('.breakaway-copy');
@@ -23,7 +22,6 @@
   const disciplineLabels = Array.from(page.querySelectorAll('.discipline-label'));
   const portfolioBoard = page.querySelector('.portfolio-board');
   const projectCards = Array.from(page.querySelectorAll('.portfolio-board .project-card'));
-  const archiveProgress = page.querySelector('.archive-progress');
   const closingSection = page.querySelector('.closing-section');
   const closingPlaceholder = page.querySelector('.closing-placeholder');
   const closingFooter = page.querySelector('.closing-footer');
@@ -32,30 +30,29 @@
   const pageLoader = page.querySelector('.page-loader');
   const pageLoaderValue = page.querySelector('.page-loader-value');
   const sectionTransition = page.querySelector('.section-transition');
-  const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
   const measureContext = document.createElement('canvas').getContext('2d');
-  const splitScrollDistance = 2.3;
-  const deconstructionTriggerDistance = 3.25;
-  const fallDuration = 1150;
-  const reconstructionDuration = 720;
-  const questionMorphDistance = 0.8;
-  const questionHoldDistance = 1.05;
-  const sectionScrollDistance = 0.8;
+  const splitScrollDistance = 5.46;
+  const deconstructionTriggerDistance = 6.76;
+  const fallDuration = 1550;
+  const reconstructionDuration = 760;
+  const questionMorphDistance = 1.1;
+  const questionHoldDistance = 3;
+  const sectionScrollDistance = 1.35;
   const archiveSectionRiseDistance = 0.55;
-  const archiveWordHoldDistance = 0.4;
-  const archiveZoomDistance = 1.5;
+  const archiveWordHoldDistance = 1;
+  const archiveZoomDistance = 3.25;
   const archiveLetterZoomDuration = 0.58;
   const archiveScaleCompleteProgress = 0.88;
   const archiveLetterFillProgress = 0.94;
   const archiveBlackProgress = 1;
-  const disciplineHoldDistance = 0.5;
-  const disciplineMoveDistance = 0.95;
-  const archiveDisplayHoldDistance = 0.2;
-  const projectScrollDistance = 1.7;
+  const disciplineHoldDistance = 2;
+  const disciplineMoveDistance = 2;
+  const archiveDisplayHoldDistance = 0.4;
+  const projectScrollDistance = 1.55;
   const projectSequenceDistance = projectCards.length * projectScrollDistance;
-  const archiveExitDistance = 1.2;
-  const closingPlaceholderHoldDistance = 1.65;
-  const footerRiseDistance = 1.4;
+  const archiveExitDistance = 1.35;
+  const closingPlaceholderHoldDistance = 0.75;
+  const footerRiseDistance = 1.35;
   const paragraphScaleY = 1.14;
 
   let frame = 0;
@@ -70,9 +67,6 @@
   let questionExitLift = window.innerHeight * 0.78;
   let questionExitProgress = 0.72;
   let archiveLetterMotions = [];
-  let disciplineMetrics = [];
-  let disciplineBandCenter = 0;
-  let disciplineLineGap = 38;
   let navigationFrame = 0;
   let navigationTimer = 0;
 
@@ -90,17 +84,12 @@
   }
 
   function scheduleLetterFlash(letters) {
-    if (motionPreference.matches) return;
-    const delay = 4200 + Math.random() * 1800;
+    const delay = 1000 + Math.random() * 500;
     window.setTimeout(() => showLetterFlash(letters), delay);
   }
 
   function showLetterFlash(letters) {
-    const regionVisible = letters === heroLetters
-      ? window.scrollY < window.innerHeight * splitScrollDistance * 0.8
-      : window.scrollY > timelineTargets().substack
-        + window.innerHeight * (closingPlaceholderHoldDistance + footerRiseDistance * 0.7);
-    if (document.hidden || !regionVisible || letters.length === 0) {
+    if (document.hidden || letters.length === 0) {
       scheduleLetterFlash(letters);
       return;
     }
@@ -113,7 +102,7 @@
       letter.classList.remove('is-calligraphic-flash');
       letter.style.removeProperty('--flash-hue');
       scheduleLetterFlash(letters);
-    }, 240);
+    }, 300);
   }
 
   function appendQuestionWords(container, text) {
@@ -320,24 +309,6 @@
     });
   }
 
-  function measureDisciplineLabels() {
-    disciplineBandCenter = archiveEdition && archiveHeadingRule
-      ? (archiveEdition.offsetTop + archiveEdition.offsetHeight + archiveHeadingRule.offsetTop) / 2
-      : window.innerHeight * 0.16;
-    const fontSizes = disciplineLabels.map((label) =>
-      Number.parseFloat(window.getComputedStyle(label).fontSize) || 48);
-    disciplineLineGap = Math.max(Math.max(...fontSizes) * 0.72, 38);
-    disciplineMetrics = disciplineLabels.map((label, index) => {
-      const content = label.firstElementChild || label;
-      const labelStyle = window.getComputedStyle(label);
-      return {
-        width: content.offsetWidth,
-        height: content.offsetHeight,
-        left: window.innerWidth * index / 3 + Number.parseFloat(labelStyle.paddingLeft || 0)
-      };
-    });
-  }
-
   function ensureScrollRunway(anchorY) {
     const requiredScrollEnd = anchorY + window.innerHeight * (
       questionMorphDistance + questionHoldDistance + sectionScrollDistance
@@ -349,7 +320,9 @@
     );
     const requiredDocumentHeight = requiredScrollEnd + window.innerHeight;
 
-    page.style.minHeight = `${Math.ceil(requiredDocumentHeight)}px`;
+    if (document.documentElement.scrollHeight < requiredDocumentHeight) {
+      page.style.minHeight = `${Math.ceil(requiredDocumentHeight)}px`;
+    }
   }
 
   function timelineTargets() {
@@ -364,8 +337,7 @@
     const disciplineMoveEndY = blackStartY
       + viewport * (disciplineHoldDistance + disciplineMoveDistance);
     const archiveExitEndY = disciplineMoveEndY
-      + viewport * (archiveDisplayHoldDistance + projectSequenceDistance
-        - projectScrollDistance * 0.12 + archiveExitDistance);
+      + viewport * (archiveDisplayHoldDistance + projectSequenceDistance + archiveExitDistance);
 
     return {
       home: 0,
@@ -400,8 +372,7 @@
     if (navigationTimer) window.clearTimeout(navigationTimer);
     navigationFrame = 0;
     navigationTimer = 0;
-    sectionTransition?.classList.remove('is-visible', 'is-fast-jump');
-    sectionTransition?.style.removeProperty('background-color');
+    sectionTransition?.classList.remove('is-visible');
     pageLoader?.classList.remove('is-visible');
   }
 
@@ -427,67 +398,39 @@
     history.replaceState(null, '', `#${sectionName}`);
   }
 
-  function navigateToProject(index, updateHash = true, hashName = projectCards[index].id) {
+  function navigateToProject(index, updateHash = true) {
     stopTimelineNavigation();
     completeNarrativeState();
     const target = timelineTargets().archive
       + index * window.innerHeight * projectScrollDistance;
     const finish = () => {
       setActiveTimelineLink('archive');
-      if (updateHash) history.replaceState(null, '', `#${hashName}`);
+      if (updateHash) history.replaceState(null, '', `#${projectCards[index].id}`);
       requestUpdate();
     };
     const distance = Math.abs(target - window.scrollY) / window.innerHeight;
-    if (!updateHash || motionPreference.matches) {
+    if (distance > 5) {
       window.scrollTo(0, target);
       finish();
-    } else if (distance > 3) {
-      const colour = index < 3 ? '#101218' : index < 7 ? '#0A141F' : '#151613';
-      crossfadeJumpTo(target, colour, finish);
     } else {
-      animateScrollTo(target, 450 + distance * 140, finish);
+      animateScrollTo(target, 500 + distance * 160, finish);
     }
-  }
-
-  function crossfadeJumpTo(target, colour, onComplete) {
-    if (!sectionTransition || motionPreference.matches) {
-      window.scrollTo(0, target);
-      updateScene(performance.now());
-      onComplete?.();
-      return;
-    }
-
-    sectionTransition.style.backgroundColor = colour;
-    sectionTransition.classList.add('is-fast-jump', 'is-visible');
-    navigationTimer = window.setTimeout(() => {
-      navigationTimer = 0;
-      window.scrollTo(0, target);
-      updateScene(performance.now());
-      onComplete?.();
-      window.requestAnimationFrame(() => {
-        sectionTransition.classList.remove('is-visible');
-        navigationTimer = window.setTimeout(() => {
-          navigationTimer = 0;
-          sectionTransition.classList.remove('is-fast-jump');
-          sectionTransition.style.removeProperty('background-color');
-        }, 220);
-      });
-    }, 220);
   }
 
   function animateScrollTo(target, duration, onComplete) {
-    if (motionPreference.matches) {
-      window.scrollTo(0, target);
-      onComplete?.();
-      return;
-    }
     const start = window.scrollY;
     const distance = target - start;
     const startTime = performance.now();
 
     function step(timestamp) {
       const progress = clamp((timestamp - startTime) / duration);
-      const eased = smoothstep(progress);
+      const edge = 0.07;
+      let eased = progress;
+      if (progress < edge) {
+        eased = edge * smoothstep(progress / edge);
+      } else if (progress > 1 - edge) {
+        eased = 1 - edge + edge * smoothstep((progress - (1 - edge)) / edge);
+      }
       window.scrollTo(0, start + distance * eased);
 
       if (progress < 1) {
@@ -543,24 +486,34 @@
 
     if (sectionName === 'about') {
       resetNarrativeState();
-      const distance = Math.abs(targets.about - window.scrollY) / window.innerHeight;
-      if (distance > 3) {
-        crossfadeJumpTo(targets.about, '#E4F1E7', () => updateLocation('about', updateHash));
-      } else {
-        animateScrollTo(targets.about, 350 + Math.min(distance, 2.3) * 320,
-          () => updateLocation('about', updateHash));
-      }
+      window.scrollTo(0, targets.home);
+      requestUpdate();
+      navigationFrame = window.requestAnimationFrame(() => {
+        navigationFrame = 0;
+        animateScrollTo(targets.about, 2200, () => updateLocation('about', updateHash));
+      });
       return;
     }
 
     if (sectionName === 'archive') {
-      navigateToProject(0, updateHash, 'archive');
+      completeNarrativeState();
+      window.scrollTo(0, targets.archiveIntro);
+      requestUpdate();
+      navigationFrame = window.requestAnimationFrame(() => {
+        navigationFrame = 0;
+        animateScrollTo(targets.archive, 3600, () => updateLocation('archive', updateHash));
+      });
       return;
     }
 
     if (sectionName === 'substack') {
-      completeNarrativeState();
-      crossfadeJumpTo(targets.substack, '#fff1f2', () => updateLocation('substack', updateHash));
+      if (sectionTransition) sectionTransition.classList.add('is-visible');
+      navigationTimer = window.setTimeout(() => {
+        navigationTimer = 0;
+        jumpToSection('substack');
+        updateLocation('substack', updateHash);
+        window.requestAnimationFrame(() => sectionTransition?.classList.remove('is-visible'));
+      }, 430);
     }
   }
 
@@ -579,7 +532,7 @@
 
     pageLoader.classList.add('is-visible');
     const startTime = performance.now();
-    const duration = 480;
+    const duration = 1050;
 
     function load(timestamp) {
       const progress = clamp((timestamp - startTime) / duration);
@@ -608,7 +561,7 @@
     pageLoaderValue.textContent = '0%';
     pageLoader.classList.add('is-visible');
     const startTime = performance.now();
-    const duration = 480;
+    const duration = 900;
 
     function load(timestamp) {
       const progress = clamp((timestamp - startTime) / duration);
@@ -636,11 +589,6 @@
     const easedSplit = smoothstep(splitProgress);
     const splitOffset = easedSplit * window.innerWidth * 0.82;
     const wordFade = splitProgress < 0.82 ? 1 : Math.max(0, (1 - splitProgress) / 0.18);
-    if (heroScrollCue) {
-      const cueOpacity = clamp((0.5 - splitProgress) / 0.5);
-      heroScrollCue.style.opacity = cueOpacity.toFixed(3);
-      heroScrollCue.style.visibility = cueOpacity > 0.01 ? 'visible' : 'hidden';
-    }
 
     const triggerY = window.innerHeight * deconstructionTriggerDistance;
     const isPastTrigger = window.scrollY > triggerY;
@@ -656,17 +604,13 @@
       ? 0
       : clamp((window.scrollY - morphAnchorY) / (window.innerHeight * questionMorphDistance));
     const fallMorphAllowance = clamp((deconstructionProgress - 0.08) / 0.92);
-    morphProgress = motionPreference.matches
-      ? scrollMorphProgress
-      : Math.min(scrollMorphProgress, fallMorphAllowance);
+    morphProgress = Math.min(scrollMorphProgress, fallMorphAllowance);
 
     // The paragraph cannot rebuild until the question has returned to its
     // original position. This keeps the reverse animation in the same order.
     deconstructionTarget = isPastTrigger || morphProgress > 0 ? 1 : 0;
 
-    if (motionPreference.matches) {
-      deconstructionProgress = deconstructionTarget;
-    } else if (deconstructionProgress !== deconstructionTarget) {
+    if (deconstructionProgress !== deconstructionTarget) {
       const direction = deconstructionTarget > deconstructionProgress ? 1 : -1;
       const activeDuration = direction > 0 ? fallDuration : reconstructionDuration;
       deconstructionProgress = clamp(
@@ -691,7 +635,6 @@
     if (questionDirty) {
       measureQuestionMorph();
       measureArchiveLetterMotions();
-      measureDisciplineLabels();
       questionDirty = false;
     }
 
@@ -700,16 +643,10 @@
     page.style.setProperty('--word-opacity', wordFade.toFixed(3));
     page.style.setProperty('--header-opacity', '1');
     page.style.setProperty('--header-pointer-events', 'auto');
-    if (breakawayCopy) {
-      const copyFade = motionPreference.matches
-        ? smoothstep(clamp((window.scrollY - triggerY) / (window.innerHeight * 0.2)))
-        : 0;
-      breakawayCopy.style.opacity = (1 - copyFade).toFixed(3);
-    }
 
     breakLetters.forEach((letter, index) => {
       const physics = fallPhysics[index];
-      const letterProgress = motionPreference.matches ? 0 : clamp(
+      const letterProgress = clamp(
         (deconstructionProgress - physics.delay) / (1 - physics.delay)
       );
       const gravityProgress = letterProgress * letterProgress;
@@ -741,10 +678,6 @@
     );
     const blackStartY = archiveZoomStartY
       + window.innerHeight * archiveZoomDistance * archiveBlackProgress;
-    const reducedArchiveFade = motionPreference.matches ? smoothstep(clamp(
-      (window.scrollY - (blackStartY - window.innerHeight * 0.35))
-      / (window.innerHeight * 0.35)
-    )) : 0;
     const disciplineMoveStartY = blackStartY + window.innerHeight * disciplineHoldDistance;
     const disciplineMoveEndY = disciplineMoveStartY + window.innerHeight * disciplineMoveDistance;
     const disciplineMoveProgress = smoothstep(clamp(
@@ -754,7 +687,7 @@
     const projectSequenceStartY = disciplineMoveEndY
       + window.innerHeight * archiveDisplayHoldDistance;
     const archiveExitStartY = projectSequenceStartY
-      + window.innerHeight * (projectSequenceDistance - projectScrollDistance * 0.12);
+      + window.innerHeight * projectSequenceDistance;
     const archiveExitProgress = morphAnchorY === null ? 0 : smoothstep(clamp(
       (window.scrollY - archiveExitStartY) / (window.innerHeight * archiveExitDistance)
     ));
@@ -794,11 +727,6 @@
     archiveLetters.forEach((letter, index) => {
       const motion = archiveLetterMotions[index];
       if (!motion) return;
-      if (motionPreference.matches) {
-        letter.style.transform = 'scaleY(1.14)';
-        letter.style.backgroundColor = 'transparent';
-        return;
-      }
 
       const letterProgress = clamp(
         (archiveZoomProgress - motion.delay) / archiveLetterZoomDuration
@@ -811,7 +739,15 @@
         (archiveZoomProgress - motion.delay) / (archiveScaleCompleteProgress - motion.delay)
       );
       const letterScale = 1 + (motion.scale - 1) * Math.pow(letterZoomProgress, 1.15);
-      letter.style.transform = `translate3d(${(motion.x * travelProgress).toFixed(2)}px, 0, 0) scale(${letterScale.toFixed(4)}) scaleY(1.14)`;
+      const width = motion.width * letterScale;
+      const height = motion.height * letterScale;
+      const centreX = motion.left + motion.width / 2 + motion.x * travelProgress;
+      const centreY = motion.top + motion.height / 2;
+
+      letter.style.left = `${(centreX - width / 2).toFixed(2)}px`;
+      letter.style.top = `${(centreY - height / 2).toFixed(2)}px`;
+      letter.style.fontSize = `${(motion.fontSize * letterScale).toFixed(2)}px`;
+      letter.style.transform = 'scaleY(1.14)';
       letter.style.zIndex = `${Math.round(travelProgress * 100) + index}`;
       // At this point every letter has finished zooming. Its enlarged box
       // covers the frame before the page background makes the black handoff.
@@ -819,7 +755,6 @@
         ? '#101218'
         : 'transparent';
     });
-    if (motionPreference.matches) archiveCoversFrame = reducedArchiveFade >= 0.999;
 
     const projectPosition = clamp(
       (window.scrollY - projectSequenceStartY) / (window.innerHeight * projectScrollDistance),
@@ -835,18 +770,13 @@
       archiveColours[2], researchBlend
     );
     const aboutColour = blendColour([246, 244, 244], [228, 241, 231], easedSplit);
-    const preArchiveColour = motionPreference.matches
-      ? blendColour(aboutColour, archiveColours[0], reducedArchiveFade)
-      : aboutColour;
     const backgroundColour = archiveCoversFrame
       ? `rgb(${archiveColour.join(', ')})`
-      : `rgb(${preArchiveColour.join(', ')})`;
+      : `rgb(${aboutColour.join(', ')})`;
     page.style.backgroundColor = backgroundColour;
     if (hero) hero.style.backgroundColor = backgroundColour;
     if (archiveWord) archiveWord.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
     if (archiveKicker) archiveKicker.style.visibility = archiveCoversFrame ? 'hidden' : 'visible';
-    if (archiveWord) archiveWord.style.opacity = (1 - reducedArchiveFade).toFixed(3);
-    if (archiveKicker) archiveKicker.style.opacity = (1 - reducedArchiveFade).toFixed(3);
 
     if (disciplineSection) {
       const disciplineVisible = archiveCoversFrame && archiveExitProgress < 0.999;
@@ -862,14 +792,17 @@
       if (closingPlaceholder) closingPlaceholder.style.opacity = '1';
       if (closingFooter) {
         const footerReady = footerProgress > 0.72;
-        if (closingFooter.inert === footerReady) closingFooter.inert = !footerReady;
-        const footerHidden = footerReady ? 'false' : 'true';
-        if (closingFooter.getAttribute('aria-hidden') !== footerHidden) {
-          closingFooter.setAttribute('aria-hidden', footerHidden);
-        }
+        closingFooter.inert = !footerReady;
+        closingFooter.setAttribute('aria-hidden', footerReady ? 'false' : 'true');
       }
     }
 
+    const headingBandCenter = archiveEdition && archiveHeadingRule
+      ? (archiveEdition.offsetTop + archiveEdition.offsetHeight + archiveHeadingRule.offsetTop) / 2
+      : window.innerHeight * 0.16;
+    const labelContents = disciplineLabels.map((label) => label.firstElementChild || label);
+    const finalFontSize = Math.max(...disciplineLabels.map((label) => parseFloat(getComputedStyle(label).fontSize || 48)));
+    const disciplineLineGap = Math.max(finalFontSize * 0.72, 38);
     const labelScale = 0.42 + disciplineMoveProgress * 0.58;
 
     const disciplineWeights = [
@@ -878,13 +811,12 @@
       researchBlend
     ];
     disciplineLabels.forEach((label, index) => {
-      const content = label.firstElementChild || label;
-      const metrics = disciplineMetrics[index];
-      if (!metrics) return;
-      const targetLeft = metrics.left;
-      const visualWidth = metrics.width;
-      const visualHeight = metrics.height;
-      const disciplineTop = disciplineBandCenter - visualHeight / 2;
+      const content = labelContents[index];
+      const labelStyle = getComputedStyle(label);
+      const targetLeft = window.innerWidth * index / 3 + parseFloat(labelStyle.paddingLeft || 0);
+      const visualWidth = content.offsetWidth;
+      const visualHeight = content.offsetHeight;
+      const disciplineTop = headingBandCenter - visualHeight / 2;
 
       label.style.top = `${disciplineTop.toFixed(2)}px`;
       content.style.transform = `scale(${labelScale.toFixed(4)})`;
@@ -907,40 +839,20 @@
       portfolioBoard.style.visibility = boardVisible ? 'visible' : 'hidden';
       portfolioBoard.style.opacity = boardProgress.toFixed(3);
       portfolioBoard.style.transform = `translate3d(0, ${((1 - boardProgress) * 11).toFixed(3)}vh, 0)`;
-      if (portfolioBoard.inert === boardReady) portfolioBoard.inert = !boardReady;
-      const boardHidden = boardVisible ? 'false' : 'true';
-      if (portfolioBoard.getAttribute('aria-hidden') !== boardHidden) {
-        portfolioBoard.setAttribute('aria-hidden', boardHidden);
-      }
+      portfolioBoard.inert = !boardReady;
+      portfolioBoard.setAttribute('aria-hidden', boardVisible ? 'false' : 'true');
       projectCards.forEach((card, index) => {
         const phase = projectPosition - index;
-        const entering = smoothstep(clamp((phase + 0.13) / 0.28));
-        const lastProject = index === projectCards.length - 1;
-        const leaving = lastProject
-          ? archiveExitProgress
-          : smoothstep(clamp((phase - 0.86) / 0.28));
-        const opacity = boardProgress * entering * (1 - leaving)
-          * (lastProject ? 1 : 1 - archiveExitProgress);
-        const rise = motionPreference.matches ? 0 : (1 - entering) * 8 - leaving * 8;
+        const entering = smoothstep(clamp(phase / 0.24));
+        const leaving = smoothstep(clamp((phase - 0.76) / 0.24));
+        const opacity = boardProgress * entering * (1 - leaving) * (1 - archiveExitProgress);
+        const rise = (1 - entering) * 12 - leaving * 12;
         card.style.opacity = opacity.toFixed(3);
         card.style.transform = `translate3d(0, ${rise.toFixed(3)}vh, 0)`;
-        const cardVisible = opacity > 0.001;
-        const cardVisibility = cardVisible ? 'visible' : 'hidden';
-        if (card.style.visibility !== cardVisibility) card.style.visibility = cardVisibility;
-        const cardReady = boardReady && opacity >= 0.98;
-        if (card.inert === cardReady) card.inert = !cardReady;
-        const cardHidden = cardVisible ? 'false' : 'true';
-        if (card.getAttribute('aria-hidden') !== cardHidden) {
-          card.setAttribute('aria-hidden', cardHidden);
-        }
+        card.style.visibility = opacity > 0.001 ? 'visible' : 'hidden';
+        card.inert = !boardReady || opacity < 0.98;
+        card.setAttribute('aria-hidden', opacity > 0.001 ? 'false' : 'true');
       });
-      if (archiveProgress) {
-        const currentProject = Math.min(projectCards.length - 1, Math.floor(projectPosition));
-        const progressText = `PROJECT ${String(currentProject + 1).padStart(2, '0')} / ${String(projectCards.length).padStart(2, '0')}`;
-        if (archiveProgress.textContent !== progressText) archiveProgress.textContent = progressText;
-        archiveProgress.style.visibility = boardVisible && archiveExitProgress < 0.9 ? 'visible' : 'hidden';
-        archiveProgress.style.opacity = (1 - archiveExitProgress).toFixed(3);
-      }
     }
 
     if (inlineQuestion) {
@@ -965,8 +877,6 @@
   }
 
   window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('wheel', stopTimelineNavigation, { passive: true });
-  window.addEventListener('touchstart', stopTimelineNavigation, { passive: true });
   timelineLinks.forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
@@ -994,7 +904,7 @@
     stopTimelineNavigation();
     seamDirty = true;
     questionDirty = true;
-    ensureScrollRunway(window.innerHeight * deconstructionTriggerDistance);
+    if (morphAnchorY !== null) ensureScrollRunway(morphAnchorY);
     requestUpdate();
   });
 
@@ -1006,7 +916,6 @@
     });
   }
 
-  ensureScrollRunway(window.innerHeight * deconstructionTriggerDistance);
   requestUpdate();
   scheduleLetterFlash(heroLetters);
   scheduleLetterFlash(closingLetters);
@@ -1020,7 +929,7 @@
   if (parameters.get('from') === 'studio' && validInitialSection) {
     window.requestAnimationFrame(() => runStudioLoader(initialSection));
   } else if (validInitialSection && initialSection !== 'home') {
-    window.requestAnimationFrame(() => jumpToSection(initialSection));
+    window.requestAnimationFrame(() => navigateTimeline(initialSection, false));
   } else {
     const projectIndex = projectCards.findIndex((card) => card.id === initialSection);
     if (projectIndex >= 0) {
