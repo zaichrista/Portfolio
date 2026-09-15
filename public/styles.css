@@ -416,13 +416,26 @@ a:focus-visible {
 .page-home .archive-edition {
   position: absolute;
   left: clamp(1.25rem, 2.8vw, 2.75rem);
+  right: clamp(1.25rem, 2.8vw, 2.75rem);
   top: clamp(4.9rem, 9.5vh, 7rem);
   margin: 0;
+  padding-bottom: clamp(0.55rem, 1vh, 0.8rem);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.58);
   font-family: Arial, Helvetica, sans-serif;
   font-size: clamp(0.56rem, 0.67vw, 0.78rem);
   letter-spacing: 0.16em;
   line-height: 1.2;
+  text-align: center;
   white-space: nowrap;
+}
+
+.page-home .archive-bottom-rule {
+  position: absolute;
+  right: clamp(1.25rem, 2.8vw, 2.75rem);
+  bottom: clamp(0.8rem, 1.8vh, 1.5rem);
+  left: clamp(1.25rem, 2.8vw, 2.75rem);
+  height: 1px;
+  background: rgba(255, 255, 255, 0.58);
 }
 
 .page-home .discipline-label {
@@ -2074,8 +2087,13 @@ a:focus-visible {
 }
 
 @media (max-width: 760px) {
-  .page-home .archive-edition {
+  .page-home .archive-edition,
+  .page-home .archive-bottom-rule {
     left: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .page-home .archive-edition {
     font-size: 0.53rem;
     letter-spacing: 0.09em;
   }
