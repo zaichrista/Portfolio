@@ -79,7 +79,7 @@
   }
 
   function scheduleHeroFlash() {
-    const delay = 2000 + Math.random() * 4500;
+    const delay = 1000 + Math.random() * 500;
     heroFlashTimer = window.setTimeout(showHeroFlash, delay);
   }
 
@@ -101,7 +101,7 @@
       letter.style.removeProperty('--flash-hue');
       if (activeHeroFlash === letter) activeHeroFlash = null;
       scheduleHeroFlash();
-    }, 500);
+    }, 300);
   }
 
   function appendQuestionWords(container, text) {

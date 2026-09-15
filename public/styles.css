@@ -1978,7 +1978,7 @@ a:focus-visible {
   letter-spacing: 0;
   line-height: 1;
   pointer-events: none;
-  transform: translate(-50%, -50%) scale(1.9);
+  transform: translate(-50%, -50%) scale(1.08);
   transform-origin: center;
   white-space: nowrap;
 }
