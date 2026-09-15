@@ -1,5 +1,5 @@
 (() => {
-  const duration = 2200;
+  const duration = 1200;
   const travelRatio = 0.82;
   let transitionFrame = 0;
 
@@ -93,6 +93,10 @@
   }
 
   function play(onCovered) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      onCovered?.();
+      return;
+    }
     if (transitionFrame) window.cancelAnimationFrame(transitionFrame);
     transition.classList.add('is-active');
     measureSeam();
